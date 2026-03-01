@@ -72,20 +72,20 @@ partial class Form1
         toolStripButton8 = new System.Windows.Forms.ToolStripButton();
         splitContainer1 = new System.Windows.Forms.SplitContainer();
         tabControlEditor = new System.Windows.Forms.TabControl();
-        statusStrip1 = new System.Windows.Forms.StatusStrip();
-        lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
         dgvErrors = new System.Windows.Forms.DataGridView();
         colFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
         colLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
         colMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        statusStrip1 = new System.Windows.Forms.StatusStrip();
+        lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
         menuStrip1.SuspendLayout();
         toolStrip1.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
         splitContainer1.Panel1.SuspendLayout();
         splitContainer1.Panel2.SuspendLayout();
         splitContainer1.SuspendLayout();
-        statusStrip1.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dgvErrors).BeginInit();
+        statusStrip1.SuspendLayout();
         SuspendLayout();
         // 
         // menuStrip1
@@ -96,10 +96,10 @@ partial class Form1
         menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { файлToolStripMenuItem, текстToolStripMenuItem, текстToolStripMenuItem1, пускToolStripMenuItem, справкаToolStripMenuItem });
         menuStrip1.Location = new System.Drawing.Point(0, 0);
-        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1504);
+        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1730);
         menuStrip1.Name = "menuStrip1";
         menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-        menuStrip1.Size = new System.Drawing.Size(1105, 32);
+        menuStrip1.Size = new System.Drawing.Size(1658, 32);
         menuStrip1.TabIndex = 0;
         menuStrip1.Text = "menuStrip1";
         // 
@@ -301,7 +301,7 @@ partial class Form1
         toolStrip1.Location = new System.Drawing.Point(0, 32);
         toolStrip1.Name = "toolStrip1";
         toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-        toolStrip1.Size = new System.Drawing.Size(1105, 47);
+        toolStrip1.Size = new System.Drawing.Size(1658, 47);
         toolStrip1.TabIndex = 0;
         toolStrip1.Text = "toolStrip1";
         // 
@@ -423,7 +423,7 @@ partial class Form1
         splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
         splitContainer1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
         splitContainer1.Location = new System.Drawing.Point(0, 79);
-        splitContainer1.Margin = new System.Windows.Forms.Padding(4082836, 3, 4082836, 3);
+        splitContainer1.Margin = new System.Windows.Forms.Padding(6124254, 3, 6124254, 3);
         splitContainer1.Name = "splitContainer1";
         splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
         // 
@@ -434,9 +434,9 @@ partial class Form1
         // splitContainer1.Panel2
         // 
         splitContainer1.Panel2.Controls.Add(dgvErrors);
-        splitContainer1.Size = new System.Drawing.Size(1105, 709);
-        splitContainer1.SplitterDistance = 300;
-        splitContainer1.SplitterWidth = 45;
+        splitContainer1.Size = new System.Drawing.Size(1658, 827);
+        splitContainer1.SplitterDistance = 349;
+        splitContainer1.SplitterWidth = 52;
         splitContainer1.TabIndex = 2;
         splitContainer1.Text = "splitContainer1";
         // 
@@ -445,30 +445,13 @@ partial class Form1
         tabControlEditor.AllowDrop = true;
         tabControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
         tabControlEditor.Location = new System.Drawing.Point(0, 0);
-        tabControlEditor.Margin = new System.Windows.Forms.Padding(48, 3, 48, 3);
+        tabControlEditor.Margin = new System.Windows.Forms.Padding(72, 3, 72, 3);
         tabControlEditor.Name = "tabControlEditor";
         tabControlEditor.SelectedIndex = 0;
-        tabControlEditor.Size = new System.Drawing.Size(1105, 300);
+        tabControlEditor.Size = new System.Drawing.Size(1658, 349);
         tabControlEditor.TabIndex = 0;
         tabControlEditor.DragDrop += Form1_DragDrop;
         tabControlEditor.DragEnter += Form1_DragEnter;
-        // 
-        // statusStrip1
-        // 
-        statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
-        statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-        statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblStatus });
-        statusStrip1.Location = new System.Drawing.Point(0, 79);
-        statusStrip1.Name = "statusStrip1";
-        statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-        statusStrip1.Size = new System.Drawing.Size(1105, 24);
-        statusStrip1.TabIndex = 1;
-        // 
-        // lblStatus
-        // 
-        lblStatus.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-        lblStatus.Name = "lblStatus";
-        lblStatus.Size = new System.Drawing.Size(0, 18);
         // 
         // dgvErrors
         // 
@@ -476,7 +459,7 @@ partial class Form1
         dgvErrors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { colFile, colLine, colMessage });
         dgvErrors.Dock = System.Windows.Forms.DockStyle.Fill;
         dgvErrors.Location = new System.Drawing.Point(0, 0);
-        dgvErrors.Margin = new System.Windows.Forms.Padding(9, 3, 9, 3);
+        dgvErrors.Margin = new System.Windows.Forms.Padding(14, 3, 14, 3);
         dgvErrors.Name = "dgvErrors";
         dgvErrors.ReadOnly = true;
         dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -488,7 +471,7 @@ partial class Form1
         dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         dgvErrors.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgvErrors.RowHeadersWidth = 51;
-        dgvErrors.Size = new System.Drawing.Size(1105, 364);
+        dgvErrors.Size = new System.Drawing.Size(1658, 426);
         dgvErrors.TabIndex = 0;
         dgvErrors.Text = "dataGridView1";
         // 
@@ -518,12 +501,28 @@ partial class Form1
         colMessage.Name = "colMessage";
         colMessage.ReadOnly = true;
         // 
+        // statusStrip1
+        // 
+        statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+        statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblStatus });
+        statusStrip1.Location = new System.Drawing.Point(0, 882);
+        statusStrip1.Name = "statusStrip1";
+        statusStrip1.Padding = new System.Windows.Forms.Padding(3, 0, 32, 0);
+        statusStrip1.Size = new System.Drawing.Size(1658, 24);
+        statusStrip1.TabIndex = 1;
+        // 
+        // lblStatus
+        // 
+        lblStatus.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+        lblStatus.Name = "lblStatus";
+        lblStatus.Size = new System.Drawing.Size(0, 18);
+        // 
         // Form1
         // 
         AllowDrop = true;
         AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(1105, 788);
+        ClientSize = new System.Drawing.Size(1658, 906);
         Controls.Add(statusStrip1);
         Controls.Add(splitContainer1);
         Controls.Add(toolStrip1);
@@ -546,9 +545,9 @@ partial class Form1
         splitContainer1.Panel2.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
         splitContainer1.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)dgvErrors).EndInit();
         statusStrip1.ResumeLayout(false);
         statusStrip1.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)dgvErrors).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
