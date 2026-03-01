@@ -88,10 +88,10 @@ partial class Form1
         menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { файлToolStripMenuItem, текстToolStripMenuItem, текстToolStripMenuItem1, пускToolStripMenuItem, справкаToolStripMenuItem });
         menuStrip1.Location = new System.Drawing.Point(0, 0);
-        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 650);
+        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 748);
         menuStrip1.Name = "menuStrip1";
         menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-        menuStrip1.Size = new System.Drawing.Size(2079, 32);
+        menuStrip1.Size = new System.Drawing.Size(2564, 32);
         menuStrip1.TabIndex = 0;
         menuStrip1.Text = "menuStrip1";
         // 
@@ -286,7 +286,7 @@ partial class Form1
         toolStrip1.Location = new System.Drawing.Point(0, 32);
         toolStrip1.Name = "toolStrip1";
         toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-        toolStrip1.Size = new System.Drawing.Size(2079, 47);
+        toolStrip1.Size = new System.Drawing.Size(2564, 47);
         toolStrip1.TabIndex = 0;
         toolStrip1.Text = "toolStrip1";
         // 
@@ -408,7 +408,7 @@ partial class Form1
         splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
         splitContainer1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
         splitContainer1.Location = new System.Drawing.Point(0, 79);
-        splitContainer1.Margin = new System.Windows.Forms.Padding(358438, 3, 358438, 3);
+        splitContainer1.Margin = new System.Windows.Forms.Padding(537657, 3, 537657, 3);
         splitContainer1.Name = "splitContainer1";
         splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
         // 
@@ -419,38 +419,42 @@ partial class Form1
         // splitContainer1.Panel2
         // 
         splitContainer1.Panel2.Controls.Add(textBox1);
-        splitContainer1.Size = new System.Drawing.Size(2079, 704);
-        splitContainer1.SplitterDistance = 320;
-        splitContainer1.SplitterWidth = 121;
+        splitContainer1.Size = new System.Drawing.Size(2564, 821);
+        splitContainer1.SplitterDistance = 373;
+        splitContainer1.SplitterWidth = 139;
         splitContainer1.TabIndex = 2;
         splitContainer1.Text = "splitContainer1";
         // 
         // tabControlEditor
         // 
+        tabControlEditor.AllowDrop = true;
         tabControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
         tabControlEditor.Location = new System.Drawing.Point(0, 0);
-        tabControlEditor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+        tabControlEditor.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
         tabControlEditor.Name = "tabControlEditor";
         tabControlEditor.SelectedIndex = 0;
-        tabControlEditor.Size = new System.Drawing.Size(2079, 320);
+        tabControlEditor.Size = new System.Drawing.Size(2564, 373);
         tabControlEditor.TabIndex = 0;
+        tabControlEditor.DragDrop += Form1_DragDrop;
+        tabControlEditor.DragEnter += Form1_DragEnter;
         // 
         // textBox1
         // 
         textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
         textBox1.Location = new System.Drawing.Point(0, 0);
-        textBox1.Margin = new System.Windows.Forms.Padding(358438, 3, 358438, 3);
+        textBox1.Margin = new System.Windows.Forms.Padding(537657, 3, 537657, 3);
         textBox1.Multiline = true;
         textBox1.Name = "textBox1";
         textBox1.ReadOnly = true;
-        textBox1.Size = new System.Drawing.Size(2079, 263);
+        textBox1.Size = new System.Drawing.Size(2564, 309);
         textBox1.TabIndex = 0;
         // 
         // Form1
         // 
+        AllowDrop = true;
         AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(2079, 783);
+        ClientSize = new System.Drawing.Size(2564, 900);
         Controls.Add(splitContainer1);
         Controls.Add(toolStrip1);
         Controls.Add(menuStrip1);
@@ -462,6 +466,8 @@ partial class Form1
         MinimumSize = new System.Drawing.Size(700, 600);
         Text = "Компилятор";
         FormClosing += Form1_FormClosing;
+        DragDrop += Form1_DragDrop;
+        DragEnter += Form1_DragEnter;
         menuStrip1.ResumeLayout(false);
         menuStrip1.PerformLayout();
         toolStrip1.ResumeLayout(false);
