@@ -266,11 +266,8 @@ public partial class Form1 : Form
         tabControlEditor.SelectedTab = newTabPage;
         fctb.IsChanged = false;
         fctb.SelectionChanged += (s, ev) => {
-            // Вычисляем текущую строку и колонку (прибавляем 1, так как индекс с 0)
             int line = fctb.Selection.Start.iLine + 1;
-            int column = fctb.Selection.Start.iChar + 1;
-    
-            lblStatus.Text = $"Строка: {line}, Столбец: {column} | Всего строк: {fctb.LinesCount}";
+            lblStatus.Text = $"Строка: {line}| Всего строк: {fctb.LinesCount}";
         };
         return fctb;
     }
