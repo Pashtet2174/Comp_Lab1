@@ -125,7 +125,7 @@ public partial class Form1 : Form
         MessageBox.Show(resultMessage, "Результат анализа", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     private void ShowAbout(object sender, EventArgs e) {
-        MessageBox.Show("Текстовый редактор / Языковой процессор\nВерсия 1.0\nРазработчик: Твоё Имя", "О программе");
+        MessageBox.Show("Текстовый редактор / Языковой процессор\nВерсия 1.0\nРазработчик: Обеленец Павел", "О программе");
     }
 
     private void ShowHelp(object sender, EventArgs e) {
