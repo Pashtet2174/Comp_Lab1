@@ -13,6 +13,7 @@ public partial class Form1 : Form
         dgvErrors.MouseEnter += (s, e) => dgvErrors.Focus(); 
         dgvErrors.MouseWheel += DgvErrors_MouseWheel;
         EnableDragDropForAll(this);
+        ApplyLocalization();
     }
     private void EnableDragDropForAll(Control parent)
     {
@@ -297,5 +298,101 @@ public partial class Form1 : Form
             ((HandledMouseEventArgs)e).Handled = true;
         }
     }
+   private void ApplyLocalization()
+    {
+        // Заголовок окна
+        this.Text = Label.AppTitle;
+    
+        // Меню Файл
+        файлToolStripMenuItem.Text = Label.MenuFile;
+        создатьToolStripMenuItem.Text = Label.MenuCreate;
+        открытьToolStripMenuItem.Text = Label.MenuOpen;
+        сохранитьToolStripMenuItem.Text = Label.MenuSave;
+        сохранитьКакToolStripMenuItem.Text = Label.MenuSaveAs;
+        выходToolStripMenuItem.Text = Label.MenuExit;
+
+        // Меню Правка
+        текстToolStripMenuItem.Text = Label.MenuEdit;
+        отменитьToolStripMenuItem.Text = Label.MenuUndo;
+        повторитToolStripMenuItem.Text = Label.MenuRedo;
+        вырезатьToolStripMenuItem.Text = Label.MenuCut;
+        копироватьToolStripMenuItem.Text = Label.MenuCopy;
+        вставитьToolStripMenuItem.Text = Label.MenuPaste;
+        удалитьToolStripMenuItem.Text = Label.MenuDelete;
+        выделитьВсёToolStripMenuItem.Text = Label.MenuSelectAll;
+
+        // Меню Текст
+        текстToolStripMenuItem1.Text = Label.MenuText;
+        постановкаЗадачиToolStripMenuItem.Text = Label.MenuTask;
+        грамматикаToolStripMenuItem.Text = Label.MenuGrammar;
+        классификацияГрамматикиToolStripMenuItem.Text = Label.MenuClass;
+        методАнализаToolStripMenuItem.Text = Label.MenuMethod;
+        тестовыйПримерToolStripMenuItem.Text = Label.MenuExample;
+        списокЛитературыToolStripMenuItem.Text = Label.MenuDocs;
+        исходныйКодПрограммыToolStripMenuItem.Text = Label.MenuSource;
+
+        // Меню Пуск и Справка
+        пускToolStripMenuItem.Text = Label.MenuRun;
+        справкаToolStripMenuItem.Text = Label.MenuHelpRoot;
+        вызовСправкиToolStripMenuItem.Text = Label.MenuShowHelp;
+        оПрограммеToolStripMenuItem.Text = Label.MenuAbout;
+
+        // Кнопки на панели (подсказки при наведении)
+        toolStripButton1.Text = Label.MenuCreate;
+        toolStripButton2.Text = Label.MenuOpen;
+        toolStripButton3.Text = Label.MenuSave;
+        toolStripButton10.Text = Label.MenuRun;
+        toolStripButton11.Text = Label.MenuShowHelp;
+        toolStripButton8.Text = Label.MenuAbout;
+
+        // Таблица ошибок
+        colFile.HeaderText = Label.ColFile;
+        colLine.HeaderText = Label.ColLine;
+        colMessage.HeaderText = Label.ColMessage;
+        // Кнопки на ToolStrip (текст всплывающих подсказок)
+        toolStripButton4.Text = Label.MenuUndo;
+        toolStripButton5.Text = Label.MenuRedo;
+        toolStripButton6.Text = Label.MenuCopy;
+        toolStripButton7.Text = Label.MenuCut;
+        toolStripButton9.Text = Label.MenuPaste;
+
+        // Меню выбора языка
+        языкToolStripMenuItem.Text = Label.MenuLangRoot;
+        русскийToolStripMenuItem.Text = Label.LangRu;
+        английскийToolStripMenuItem.Text = Label.LangEn;
+        
+        // Начальный статус
+        if (string.IsNullOrEmpty(lblStatus.Text)) 
+            lblStatus.Text = Label.StatusReady;
+    }
    
+    private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        ChangeLanguage("en-US");
+    }
+
+// Обработчик для кнопки "Русский"
+    private void russianToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        ChangeLanguage("ru-RU");
+    }
+    private void ChangeLanguage(string cultureName)
+    {
+        // Меняем культуру интерфейса для всего приложения
+        System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(cultureName);
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
+
+        // Вызываем ваш метод, который переназначит тексты всем кнопкам и меню
+        ApplyLocalization();
+
+        // Дополнительно: если у вас есть открытые вкладки "Новый файл", 
+        // их названия тоже можно обновить здесь через цикл
+        foreach (TabPage tab in tabControlEditor.TabPages)
+        {
+            if (tab.Tag != null && string.IsNullOrEmpty(tab.Tag.ToString()))
+            {
+                tab.Text = Label.NewFile; // Не забудьте добавить ключ NewFile в ресурсы
+            }
+        }
+    }
 }

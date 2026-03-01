@@ -58,6 +58,9 @@ partial class Form1
         справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         вызовСправкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        языкToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        русскийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        английскийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStrip1 = new System.Windows.Forms.ToolStrip();
         toolStripButton1 = new System.Windows.Forms.ToolStripButton();
         toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -91,15 +94,15 @@ partial class Form1
         // menuStrip1
         // 
         menuStrip1.BackColor = System.Drawing.Color.LightSteelBlue;
-        menuStrip1.Font = new System.Drawing.Font("Wide Latin", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        menuStrip1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
         menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
         menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-        menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { файлToolStripMenuItem, текстToolStripMenuItem, текстToolStripMenuItem1, пускToolStripMenuItem, справкаToolStripMenuItem });
+        menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { файлToolStripMenuItem, текстToolStripMenuItem, текстToolStripMenuItem1, пускToolStripMenuItem, справкаToolStripMenuItem, языкToolStripMenuItem });
         menuStrip1.Location = new System.Drawing.Point(0, 0);
-        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1730);
+        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3289);
         menuStrip1.Name = "menuStrip1";
         menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-        menuStrip1.Size = new System.Drawing.Size(1658, 32);
+        menuStrip1.Size = new System.Drawing.Size(612, 29);
         menuStrip1.TabIndex = 0;
         menuStrip1.Text = "menuStrip1";
         // 
@@ -107,7 +110,7 @@ partial class Form1
         // 
         файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { создатьToolStripMenuItem, открытьToolStripMenuItem, сохранитьToolStripMenuItem, сохранитьКакToolStripMenuItem, выходToolStripMenuItem });
         файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-        файлToolStripMenuItem.Size = new System.Drawing.Size(73, 32);
+        файлToolStripMenuItem.Size = new System.Drawing.Size(67, 29);
         файлToolStripMenuItem.Text = "Файл";
         // 
         // создатьToolStripMenuItem
@@ -115,7 +118,7 @@ partial class Form1
         создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
         создатьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N));
         создатьToolStripMenuItem.ShowShortcutKeys = false;
-        создатьToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
+        создатьToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
         создатьToolStripMenuItem.Text = "Создать";
         создатьToolStripMenuItem.Click += CreateFile;
         // 
@@ -124,7 +127,7 @@ partial class Form1
         открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
         открытьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O));
         открытьToolStripMenuItem.ShowShortcutKeys = false;
-        открытьToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
+        открытьToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
         открытьToolStripMenuItem.Text = "Открыть";
         открытьToolStripMenuItem.Click += OpenFile;
         // 
@@ -133,21 +136,21 @@ partial class Form1
         сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
         сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S));
         сохранитьToolStripMenuItem.ShowShortcutKeys = false;
-        сохранитьToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
+        сохранитьToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
         сохранитьToolStripMenuItem.Text = "Сохранить";
         сохранитьToolStripMenuItem.Click += SaveFile;
         // 
         // сохранитьКакToolStripMenuItem
         // 
         сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-        сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
+        сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
         сохранитьКакToolStripMenuItem.Text = "Сохранить как";
         сохранитьКакToolStripMenuItem.Click += SaveFileAs;
         // 
         // выходToolStripMenuItem
         // 
         выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-        выходToolStripMenuItem.Size = new System.Drawing.Size(231, 32);
+        выходToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
         выходToolStripMenuItem.Text = "Выход";
         выходToolStripMenuItem.Click += ExitApp;
         // 
@@ -155,55 +158,55 @@ partial class Form1
         // 
         текстToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { отменитьToolStripMenuItem, повторитToolStripMenuItem, вырезатьToolStripMenuItem, копироватьToolStripMenuItem, вставитьToolStripMenuItem, удалитьToolStripMenuItem, выделитьВсёToolStripMenuItem });
         текстToolStripMenuItem.Name = "текстToolStripMenuItem";
-        текстToolStripMenuItem.Size = new System.Drawing.Size(90, 32);
+        текстToolStripMenuItem.Size = new System.Drawing.Size(87, 29);
         текстToolStripMenuItem.Text = "Правка";
         // 
         // отменитьToolStripMenuItem
         // 
         отменитьToolStripMenuItem.Name = "отменитьToolStripMenuItem";
-        отменитьToolStripMenuItem.Size = new System.Drawing.Size(227, 32);
+        отменитьToolStripMenuItem.Size = new System.Drawing.Size(207, 30);
         отменитьToolStripMenuItem.Text = "Отменить";
         отменитьToolStripMenuItem.Click += Undo_Click;
         // 
         // повторитToolStripMenuItem
         // 
         повторитToolStripMenuItem.Name = "повторитToolStripMenuItem";
-        повторитToolStripMenuItem.Size = new System.Drawing.Size(227, 32);
+        повторитToolStripMenuItem.Size = new System.Drawing.Size(207, 30);
         повторитToolStripMenuItem.Text = "Повторить";
         повторитToolStripMenuItem.Click += Redo_Click;
         // 
         // вырезатьToolStripMenuItem
         // 
         вырезатьToolStripMenuItem.Name = "вырезатьToolStripMenuItem";
-        вырезатьToolStripMenuItem.Size = new System.Drawing.Size(227, 32);
+        вырезатьToolStripMenuItem.Size = new System.Drawing.Size(207, 30);
         вырезатьToolStripMenuItem.Text = "Вырезать";
         вырезатьToolStripMenuItem.Click += Cut_Click;
         // 
         // копироватьToolStripMenuItem
         // 
         копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
-        копироватьToolStripMenuItem.Size = new System.Drawing.Size(227, 32);
+        копироватьToolStripMenuItem.Size = new System.Drawing.Size(207, 30);
         копироватьToolStripMenuItem.Text = "Копировать";
         копироватьToolStripMenuItem.Click += Copy_Click;
         // 
         // вставитьToolStripMenuItem
         // 
         вставитьToolStripMenuItem.Name = "вставитьToolStripMenuItem";
-        вставитьToolStripMenuItem.Size = new System.Drawing.Size(227, 32);
+        вставитьToolStripMenuItem.Size = new System.Drawing.Size(207, 30);
         вставитьToolStripMenuItem.Text = "Вставить";
         вставитьToolStripMenuItem.Click += Paste_Click;
         // 
         // удалитьToolStripMenuItem
         // 
         удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-        удалитьToolStripMenuItem.Size = new System.Drawing.Size(227, 32);
+        удалитьToolStripMenuItem.Size = new System.Drawing.Size(207, 30);
         удалитьToolStripMenuItem.Text = "Удалить";
         удалитьToolStripMenuItem.Click += Delete_Click;
         // 
         // выделитьВсёToolStripMenuItem
         // 
         выделитьВсёToolStripMenuItem.Name = "выделитьВсёToolStripMenuItem";
-        выделитьВсёToolStripMenuItem.Size = new System.Drawing.Size(227, 32);
+        выделитьВсёToolStripMenuItem.Size = new System.Drawing.Size(207, 30);
         выделитьВсёToolStripMenuItem.Text = "Выделить всё";
         выделитьВсёToolStripMenuItem.Click += SelectAll_Click;
         // 
@@ -211,55 +214,55 @@ partial class Form1
         // 
         текстToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { постановкаЗадачиToolStripMenuItem, грамматикаToolStripMenuItem, классификацияГрамматикиToolStripMenuItem, методАнализаToolStripMenuItem, тестовыйПримерToolStripMenuItem, списокЛитературыToolStripMenuItem, исходныйКодПрограммыToolStripMenuItem });
         текстToolStripMenuItem1.Name = "текстToolStripMenuItem1";
-        текстToolStripMenuItem1.Size = new System.Drawing.Size(78, 32);
+        текстToolStripMenuItem1.Size = new System.Drawing.Size(68, 29);
         текстToolStripMenuItem1.Text = "Текст";
         // 
         // постановкаЗадачиToolStripMenuItem
         // 
         постановкаЗадачиToolStripMenuItem.Name = "постановкаЗадачиToolStripMenuItem";
-        постановкаЗадачиToolStripMenuItem.Size = new System.Drawing.Size(351, 32);
+        постановкаЗадачиToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         постановкаЗадачиToolStripMenuItem.Text = "Постановка задачи";
         постановкаЗадачиToolStripMenuItem.Click += Placeholder_Click;
         // 
         // грамматикаToolStripMenuItem
         // 
         грамматикаToolStripMenuItem.Name = "грамматикаToolStripMenuItem";
-        грамматикаToolStripMenuItem.Size = new System.Drawing.Size(351, 32);
+        грамматикаToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         грамматикаToolStripMenuItem.Text = "Грамматика";
         грамматикаToolStripMenuItem.Click += Placeholder_Click;
         // 
         // классификацияГрамматикиToolStripMenuItem
         // 
         классификацияГрамматикиToolStripMenuItem.Name = "классификацияГрамматикиToolStripMenuItem";
-        классификацияГрамматикиToolStripMenuItem.Size = new System.Drawing.Size(351, 32);
+        классификацияГрамматикиToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         классификацияГрамматикиToolStripMenuItem.Text = "Классификация грамматики";
         классификацияГрамматикиToolStripMenuItem.Click += Placeholder_Click;
         // 
         // методАнализаToolStripMenuItem
         // 
         методАнализаToolStripMenuItem.Name = "методАнализаToolStripMenuItem";
-        методАнализаToolStripMenuItem.Size = new System.Drawing.Size(351, 32);
+        методАнализаToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         методАнализаToolStripMenuItem.Text = "Метод анализа";
         методАнализаToolStripMenuItem.Click += Placeholder_Click;
         // 
         // тестовыйПримерToolStripMenuItem
         // 
         тестовыйПримерToolStripMenuItem.Name = "тестовыйПримерToolStripMenuItem";
-        тестовыйПримерToolStripMenuItem.Size = new System.Drawing.Size(351, 32);
+        тестовыйПримерToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         тестовыйПримерToolStripMenuItem.Text = "Тестовый пример";
         тестовыйПримерToolStripMenuItem.Click += Placeholder_Click;
         // 
         // списокЛитературыToolStripMenuItem
         // 
         списокЛитературыToolStripMenuItem.Name = "списокЛитературыToolStripMenuItem";
-        списокЛитературыToolStripMenuItem.Size = new System.Drawing.Size(351, 32);
+        списокЛитературыToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         списокЛитературыToolStripMenuItem.Text = "Список литературы";
         списокЛитературыToolStripMenuItem.Click += Placeholder_Click;
         // 
         // исходныйКодПрограммыToolStripMenuItem
         // 
         исходныйКодПрограммыToolStripMenuItem.Name = "исходныйКодПрограммыToolStripMenuItem";
-        исходныйКодПрограммыToolStripMenuItem.Size = new System.Drawing.Size(351, 32);
+        исходныйКодПрограммыToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         исходныйКодПрограммыToolStripMenuItem.Text = "Исходный код программы";
         исходныйКодПрограммыToolStripMenuItem.Click += Placeholder_Click;
         // 
@@ -267,7 +270,7 @@ partial class Form1
         // 
         пускToolStripMenuItem.Name = "пускToolStripMenuItem";
         пускToolStripMenuItem.ShowShortcutKeys = false;
-        пускToolStripMenuItem.Size = new System.Drawing.Size(67, 32);
+        пускToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
         пускToolStripMenuItem.Text = "Пуск";
         пускToolStripMenuItem.Click += RunParser;
         // 
@@ -275,22 +278,43 @@ partial class Form1
         // 
         справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { вызовСправкиToolStripMenuItem, оПрограммеToolStripMenuItem });
         справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-        справкаToolStripMenuItem.Size = new System.Drawing.Size(101, 32);
+        справкаToolStripMenuItem.Size = new System.Drawing.Size(95, 29);
         справкаToolStripMenuItem.Text = "Справка";
         // 
         // вызовСправкиToolStripMenuItem
         // 
         вызовСправкиToolStripMenuItem.Name = "вызовСправкиToolStripMenuItem";
-        вызовСправкиToolStripMenuItem.Size = new System.Drawing.Size(235, 32);
+        вызовСправкиToolStripMenuItem.Size = new System.Drawing.Size(222, 30);
         вызовСправкиToolStripMenuItem.Text = "Вызов справки";
         вызовСправкиToolStripMenuItem.Click += ShowHelp;
         // 
         // оПрограммеToolStripMenuItem
         // 
         оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-        оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(235, 32);
+        оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(222, 30);
         оПрограммеToolStripMenuItem.Text = "О программе";
         оПрограммеToolStripMenuItem.Click += ShowAbout;
+        // 
+        // языкToolStripMenuItem
+        // 
+        языкToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { русскийToolStripMenuItem, английскийToolStripMenuItem });
+        языкToolStripMenuItem.Name = "языкToolStripMenuItem";
+        языкToolStripMenuItem.Size = new System.Drawing.Size(67, 29);
+        языкToolStripMenuItem.Text = "Язык";
+        // 
+        // русскийToolStripMenuItem
+        // 
+        русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
+        русскийToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        русскийToolStripMenuItem.Text = "Русский";
+        русскийToolStripMenuItem.Click += russianToolStripMenuItem_Click;
+        // 
+        // английскийToolStripMenuItem
+        // 
+        английскийToolStripMenuItem.Name = "английскийToolStripMenuItem";
+        английскийToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        английскийToolStripMenuItem.Text = "Английский";
+        английскийToolStripMenuItem.Click += englishToolStripMenuItem_Click;
         // 
         // toolStrip1
         // 
@@ -298,10 +322,10 @@ partial class Form1
         toolStrip1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)204));
         toolStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
         toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripButton4, toolStripButton5, toolStripButton6, toolStripButton7, toolStripButton9, toolStripButton10, toolStripButton11, toolStripButton8 });
-        toolStrip1.Location = new System.Drawing.Point(0, 32);
+        toolStrip1.Location = new System.Drawing.Point(0, 29);
         toolStrip1.Name = "toolStrip1";
         toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-        toolStrip1.Size = new System.Drawing.Size(1658, 47);
+        toolStrip1.Size = new System.Drawing.Size(612, 47);
         toolStrip1.TabIndex = 0;
         toolStrip1.Text = "toolStrip1";
         // 
@@ -422,8 +446,8 @@ partial class Form1
         splitContainer1.BackColor = System.Drawing.SystemColors.ActiveCaption;
         splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
         splitContainer1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-        splitContainer1.Location = new System.Drawing.Point(0, 79);
-        splitContainer1.Margin = new System.Windows.Forms.Padding(6124254, 3, 6124254, 3);
+        splitContainer1.Location = new System.Drawing.Point(0, 76);
+        splitContainer1.Margin = new System.Windows.Forms.Padding(25836696, 3, 25836696, 3);
         splitContainer1.Name = "splitContainer1";
         splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
         // 
@@ -434,9 +458,9 @@ partial class Form1
         // splitContainer1.Panel2
         // 
         splitContainer1.Panel2.Controls.Add(dgvErrors);
-        splitContainer1.Size = new System.Drawing.Size(1658, 827);
-        splitContainer1.SplitterDistance = 349;
-        splitContainer1.SplitterWidth = 52;
+        splitContainer1.Size = new System.Drawing.Size(612, 764);
+        splitContainer1.SplitterDistance = 320;
+        splitContainer1.SplitterWidth = 99;
         splitContainer1.TabIndex = 2;
         splitContainer1.Text = "splitContainer1";
         // 
@@ -445,10 +469,10 @@ partial class Form1
         tabControlEditor.AllowDrop = true;
         tabControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
         tabControlEditor.Location = new System.Drawing.Point(0, 0);
-        tabControlEditor.Margin = new System.Windows.Forms.Padding(72, 3, 72, 3);
+        tabControlEditor.Margin = new System.Windows.Forms.Padding(303, 3, 303, 3);
         tabControlEditor.Name = "tabControlEditor";
         tabControlEditor.SelectedIndex = 0;
-        tabControlEditor.Size = new System.Drawing.Size(1658, 349);
+        tabControlEditor.Size = new System.Drawing.Size(612, 320);
         tabControlEditor.TabIndex = 0;
         tabControlEditor.DragDrop += Form1_DragDrop;
         tabControlEditor.DragEnter += Form1_DragEnter;
@@ -459,19 +483,19 @@ partial class Form1
         dgvErrors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { colFile, colLine, colMessage });
         dgvErrors.Dock = System.Windows.Forms.DockStyle.Fill;
         dgvErrors.Location = new System.Drawing.Point(0, 0);
-        dgvErrors.Margin = new System.Windows.Forms.Padding(14, 3, 14, 3);
+        dgvErrors.Margin = new System.Windows.Forms.Padding(60, 3, 60, 3);
         dgvErrors.Name = "dgvErrors";
         dgvErrors.ReadOnly = true;
         dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
         dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-        dataGridViewCellStyle1.Font = new System.Drawing.Font("Showcard Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
         dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
         dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
         dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
         dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         dgvErrors.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgvErrors.RowHeadersWidth = 51;
-        dgvErrors.Size = new System.Drawing.Size(1658, 426);
+        dgvErrors.Size = new System.Drawing.Size(612, 345);
         dgvErrors.TabIndex = 0;
         dgvErrors.Text = "dataGridView1";
         // 
@@ -482,7 +506,7 @@ partial class Form1
         colFile.MinimumWidth = 6;
         colFile.Name = "colFile";
         colFile.ReadOnly = true;
-        colFile.Width = 84;
+        colFile.Width = 82;
         // 
         // colLine
         // 
@@ -505,34 +529,33 @@ partial class Form1
         // 
         statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblStatus });
-        statusStrip1.Location = new System.Drawing.Point(0, 882);
+        statusStrip1.Location = new System.Drawing.Point(0, 818);
         statusStrip1.Name = "statusStrip1";
-        statusStrip1.Padding = new System.Windows.Forms.Padding(3, 0, 32, 0);
-        statusStrip1.Size = new System.Drawing.Size(1658, 24);
+        statusStrip1.Padding = new System.Windows.Forms.Padding(12, 0, 135, 0);
+        statusStrip1.Size = new System.Drawing.Size(612, 22);
         statusStrip1.TabIndex = 1;
         // 
         // lblStatus
         // 
         lblStatus.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
         lblStatus.Name = "lblStatus";
-        lblStatus.Size = new System.Drawing.Size(0, 18);
+        lblStatus.Size = new System.Drawing.Size(0, 16);
         // 
         // Form1
         // 
         AllowDrop = true;
-        AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
+        AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(1658, 906);
+        ClientSize = new System.Drawing.Size(612, 840);
         Controls.Add(statusStrip1);
         Controls.Add(splitContainer1);
         Controls.Add(toolStrip1);
         Controls.Add(menuStrip1);
-        Font = new System.Drawing.Font("Showcard Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
         ForeColor = System.Drawing.SystemColors.AppWorkspace;
         Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));
         MainMenuStrip = menuStrip1;
-        Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-        MinimumSize = new System.Drawing.Size(700, 600);
+        MinimumSize = new System.Drawing.Size(586, 648);
         Text = "Компилятор";
         FormClosing += Form1_FormClosing;
         DragDrop += Form1_DragDrop;
@@ -551,6 +574,10 @@ partial class Form1
         ResumeLayout(false);
         PerformLayout();
     }
+
+    private System.Windows.Forms.ToolStripMenuItem языкToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem английскийToolStripMenuItem;
 
     private System.Windows.Forms.ToolStripStatusLabel lblStatus;
 
