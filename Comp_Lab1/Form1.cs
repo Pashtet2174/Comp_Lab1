@@ -76,6 +76,7 @@ public partial class Form1 : Form
             System.IO.File.WriteAllText(path, CurrentEditor.Text);
             CurrentEditor.IsChanged = false;
             tabControlEditor.SelectedTab.Text = System.IO.Path.GetFileName(path);
+            lblStatus.Text = "Файл успешно сохранен.";
         }
     }
     private void SaveFileAs(object sender = null, EventArgs e = null) {
@@ -119,7 +120,7 @@ public partial class Form1 : Form
             return;
         }
         string resultMessage = "Ошибок не обнаружено.";
-
+        lblStatus.Text = "Анализ завершен.";
         MessageBox.Show(resultMessage, "Результат анализа", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     private void ShowAbout(object sender, EventArgs e) {
@@ -264,7 +265,13 @@ public partial class Form1 : Form
         tabControlEditor.TabPages.Add(newTabPage);
         tabControlEditor.SelectedTab = newTabPage;
         fctb.IsChanged = false;
-
+        fctb.SelectionChanged += (s, ev) => {
+            // Вычисляем текущую строку и колонку (прибавляем 1, так как индекс с 0)
+            int line = fctb.Selection.Start.iLine + 1;
+            int column = fctb.Selection.Start.iChar + 1;
+    
+            lblStatus.Text = $"Строка: {line}, Столбец: {column} | Всего строк: {fctb.LinesCount}";
+        };
         return fctb;
     }
     private FastColoredTextBox CurrentEditor => 
