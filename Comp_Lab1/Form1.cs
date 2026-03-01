@@ -10,7 +10,8 @@ public partial class Form1 : Form
         this.AllowDrop = true;
         this.DragEnter += Form1_DragEnter;
         this.DragDrop += Form1_DragDrop;
-
+        dgvErrors.MouseEnter += (s, e) => dgvErrors.Focus(); 
+        dgvErrors.MouseWheel += DgvErrors_MouseWheel;
         EnableDragDropForAll(this);
     }
     private void EnableDragDropForAll(Control parent)
@@ -268,6 +269,29 @@ public partial class Form1 : Form
     }
     private FastColoredTextBox CurrentEditor => 
         tabControlEditor.SelectedTab?.Controls[0] as FastColoredTextBox;
+    
+    private void DgvErrors_MouseWheel(object sender, MouseEventArgs e)
+    {
+        if (Control.ModifierKeys == Keys.Control)
+        {
+            float currentSize = dgvErrors.DefaultCellStyle.Font.Size;
+            float newSize = e.Delta > 0 ? currentSize + 1 : currentSize - 1;
 
+            if (newSize >= 6 && newSize <= 32)
+            {
+                Font newFont = new Font(dgvErrors.Font.FontFamily, newSize);
+
+                dgvErrors.DefaultCellStyle.Font = newFont;
+
+                dgvErrors.ColumnHeadersDefaultCellStyle.Font = newFont;
+
+                dgvErrors.AutoResizeColumnHeadersHeight();
+            
+                dgvErrors.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
+            }
+
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+    }
    
 }

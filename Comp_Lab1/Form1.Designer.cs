@@ -92,10 +92,10 @@ partial class Form1
         menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { файлToolStripMenuItem, текстToolStripMenuItem, текстToolStripMenuItem1, пускToolStripMenuItem, справкаToolStripMenuItem });
         menuStrip1.Location = new System.Drawing.Point(0, 0);
-        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 989);
+        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1137);
         menuStrip1.Name = "menuStrip1";
         menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-        menuStrip1.Size = new System.Drawing.Size(879, 32);
+        menuStrip1.Size = new System.Drawing.Size(1318, 32);
         menuStrip1.TabIndex = 0;
         menuStrip1.Text = "menuStrip1";
         // 
@@ -297,7 +297,7 @@ partial class Form1
         toolStrip1.Location = new System.Drawing.Point(0, 32);
         toolStrip1.Name = "toolStrip1";
         toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-        toolStrip1.Size = new System.Drawing.Size(879, 47);
+        toolStrip1.Size = new System.Drawing.Size(1318, 47);
         toolStrip1.TabIndex = 0;
         toolStrip1.Text = "toolStrip1";
         // 
@@ -419,7 +419,7 @@ partial class Form1
         splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
         splitContainer1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
         splitContainer1.Location = new System.Drawing.Point(0, 79);
-        splitContainer1.Margin = new System.Windows.Forms.Padding(1209729, 3, 1209729, 3);
+        splitContainer1.Margin = new System.Windows.Forms.Padding(1814594, 3, 1814594, 3);
         splitContainer1.Name = "splitContainer1";
         splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
         // 
@@ -430,9 +430,9 @@ partial class Form1
         // splitContainer1.Panel2
         // 
         splitContainer1.Panel2.Controls.Add(dgvErrors);
-        splitContainer1.Size = new System.Drawing.Size(879, 474);
-        splitContainer1.SplitterDistance = 201;
-        splitContainer1.SplitterWidth = 30;
+        splitContainer1.Size = new System.Drawing.Size(1318, 557);
+        splitContainer1.SplitterDistance = 236;
+        splitContainer1.SplitterWidth = 34;
         splitContainer1.TabIndex = 2;
         splitContainer1.Text = "splitContainer1";
         // 
@@ -441,10 +441,10 @@ partial class Form1
         tabControlEditor.AllowDrop = true;
         tabControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
         tabControlEditor.Location = new System.Drawing.Point(0, 0);
-        tabControlEditor.Margin = new System.Windows.Forms.Padding(14, 3, 14, 3);
+        tabControlEditor.Margin = new System.Windows.Forms.Padding(21, 3, 21, 3);
         tabControlEditor.Name = "tabControlEditor";
         tabControlEditor.SelectedIndex = 0;
-        tabControlEditor.Size = new System.Drawing.Size(879, 201);
+        tabControlEditor.Size = new System.Drawing.Size(1318, 236);
         tabControlEditor.TabIndex = 0;
         tabControlEditor.DragDrop += Form1_DragDrop;
         tabControlEditor.DragEnter += Form1_DragEnter;
@@ -455,42 +455,45 @@ partial class Form1
         dgvErrors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { colFile, colLine, colMessage });
         dgvErrors.Dock = System.Windows.Forms.DockStyle.Fill;
         dgvErrors.Location = new System.Drawing.Point(0, 0);
+        dgvErrors.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
         dgvErrors.Name = "dgvErrors";
         dgvErrors.RowHeadersWidth = 51;
-        dgvErrors.Size = new System.Drawing.Size(879, 243);
+        dgvErrors.Size = new System.Drawing.Size(1318, 287);
         dgvErrors.TabIndex = 0;
         dgvErrors.Text = "dataGridView1";
         // 
         // colFile
         // 
+        colFile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
         colFile.HeaderText = "Файл";
         colFile.MinimumWidth = 6;
         colFile.Name = "colFile";
         colFile.ReadOnly = true;
-        colFile.Width = 125;
+        colFile.Width = 84;
         // 
         // colLine
         // 
+        colLine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
         colLine.HeaderText = "Строка";
         colLine.MinimumWidth = 6;
         colLine.Name = "colLine";
         colLine.ReadOnly = true;
-        colLine.Width = 125;
+        colLine.Width = 99;
         // 
         // colMessage
         // 
+        colMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
         colMessage.HeaderText = "Описание";
         colMessage.MinimumWidth = 6;
         colMessage.Name = "colMessage";
         colMessage.ReadOnly = true;
-        colMessage.Width = 125;
         // 
         // Form1
         // 
         AllowDrop = true;
         AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(879, 553);
+        ClientSize = new System.Drawing.Size(1318, 636);
         Controls.Add(splitContainer1);
         Controls.Add(toolStrip1);
         Controls.Add(menuStrip1);
