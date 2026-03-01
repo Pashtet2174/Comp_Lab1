@@ -7,13 +7,10 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
-        // 1. Разрешаем форме принимать файлы
         this.AllowDrop = true;
         this.DragEnter += Form1_DragEnter;
         this.DragDrop += Form1_DragDrop;
 
-        // 2. Рекурсивно разрешаем всем дочерним элементам (TabControl, Панели и т.д.) 
-        // принимать файлы и перенаправлять их обработчикам формы
         EnableDragDropForAll(this);
     }
     private void EnableDragDropForAll(Control parent)
@@ -24,7 +21,6 @@ public partial class Form1 : Form
             c.DragEnter += Form1_DragEnter;
             c.DragDrop += Form1_DragDrop;
         
-            // Если внутри элемента есть другие элементы (например, в SplitContainer)
             if (c.HasChildren)
             {
                 EnableDragDropForAll(c);
@@ -65,23 +61,19 @@ public partial class Form1 : Form
         if (ofd.ShowDialog() == DialogResult.OK)
         {
             string content = System.IO.File.ReadAllText(ofd.FileName);
-            // Метод CreateNewTab сам запишет путь в Tag и создаст вкладку
             CreateNewTab(ofd.FileName, content);
         }
     }
     private void SaveFile(object sender = null, EventArgs e = null) {
         if (tabControlEditor.SelectedTab == null || CurrentEditor == null) return;
 
-        // Читаем путь из Tag текущей вкладки
         string path = tabControlEditor.SelectedTab.Tag as string;
 
-        // Если в Tag написано "Новый файл" или там пусто — вызываем "Сохранить как"
         if (string.IsNullOrEmpty(path) || path == "Новый файл") {
             SaveFileAs(); 
         } else {
             System.IO.File.WriteAllText(path, CurrentEditor.Text);
             CurrentEditor.IsChanged = false;
-            // Можно обновить заголовок вкладки (убрать звездочку, если она была)
             tabControlEditor.SelectedTab.Text = System.IO.Path.GetFileName(path);
         }
     }
@@ -90,17 +82,15 @@ public partial class Form1 : Form
 
         SaveFileDialog sfd = new SaveFileDialog { Filter = "Text Files|*.txt|All Files|*.*" };
         if (sfd.ShowDialog() == DialogResult.OK) {
-            // Обновляем путь в Tag вкладки
             tabControlEditor.SelectedTab.Tag = sfd.FileName;
-            // Обновляем текст на самой вкладке
             tabControlEditor.SelectedTab.Text = System.IO.Path.GetFileName(sfd.FileName);
         
-            SaveFile(); // Теперь SaveFile увидит новый путь в Tag и сохранит
+            SaveFile();
         }
     }
     private void ExitApp(object sender = null, EventArgs e = null)
     {
-        this.Close(); // Это вызовет FormClosing, и сработает наша проверка
+        this.Close();
     }
     
     private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -110,7 +100,7 @@ public partial class Form1 : Form
             var fctb = tab.Controls[0] as FastColoredTextBox;
             if (fctb != null && fctb.IsChanged)
             {
-                tabControlEditor.SelectedTab = tab; // Переключаемся на измененный файл
+                tabControlEditor.SelectedTab = tab; 
                 var result = MessageBox.Show($"Сохранить изменения в файле {tab.Text}?", "Выход", 
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
@@ -121,26 +111,15 @@ public partial class Form1 : Form
     }
     private void RunParser(object sender = null, EventArgs e = null) 
     {
-        // 1. Получаем текст из редактора для анализа
-        string codeToAnalyze = CurrentEditor.Text;
-
-        // 2. Проверяем, не пустой ли он
-        if (string.IsNullOrWhiteSpace(codeToAnalyze))
+        if (tabControlEditor.TabPages.Count == 0 || CurrentEditor == null)
         {
-            MessageBox.Show("Нет текста для анализа!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Сначала создайте или откройте файл для анализа!", 
+                "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
-
-        // 3. Имитируем работу анализатора (здесь позже будет твоя логика)
-        // Пока просто выводим сообщение об успехе
-        string resultMessage = "Синтаксический анализ завершен успешно.\n\n" +
-                               "Проверено строк: " + CurrentEditor.LinesCount + "\n" +
-                               "Ошибок не обнаружено.";
+        string resultMessage = "Ошибок не обнаружено.";
 
         MessageBox.Show(resultMessage, "Результат анализа", MessageBoxButtons.OK, MessageBoxIcon.Information);
-    
-        // Также хорошим тоном будет дублировать это в нижнее окно (если оно есть)
-        // richTextBoxOutput.Text = "Анализ выполнен в " + DateTime.Now.ToLongTimeString();
     }
     private void ShowAbout(object sender, EventArgs e) {
         MessageBox.Show("Текстовый редактор / Языковой процессор\nВерсия 1.0\nРазработчик: Твоё Имя", "О программе");
@@ -190,38 +169,105 @@ public partial class Form1 : Form
         fctb.Language = FastColoredTextBoxNS.Language.CSharp;
         fctb.Text = content;
 
-        // --- НАСТРОЙКА ГОРЯЧИХ КЛАВИШ ---
         fctb.HotkeysMapping.Clear();
 
-// Используем полный путь к ServiceAction, чтобы точно не было ошибок
+        // --- Одиночные клавиши ---
+        fctb.HotkeysMapping.Add(Keys.Tab, FCTBAction.IndentIncrease);
+        fctb.HotkeysMapping.Add(Keys.Escape, FCTBAction.ClearHints);
+        fctb.HotkeysMapping.Add(Keys.PageUp, FCTBAction.GoPageUp);
+        fctb.HotkeysMapping.Add(Keys.PageDown, FCTBAction.GoPageDown);
+        fctb.HotkeysMapping.Add(Keys.End, FCTBAction.GoEnd);
+        fctb.HotkeysMapping.Add(Keys.Home, FCTBAction.GoHome);
+        fctb.HotkeysMapping.Add(Keys.Left, FCTBAction.GoLeft);
+        fctb.HotkeysMapping.Add(Keys.Up, FCTBAction.GoUp);
+        fctb.HotkeysMapping.Add(Keys.Right, FCTBAction.GoRight);
+        fctb.HotkeysMapping.Add(Keys.Down, FCTBAction.GoDown);
+        fctb.HotkeysMapping.Add(Keys.Insert, FCTBAction.ReplaceMode);
+        fctb.HotkeysMapping.Add(Keys.Delete, FCTBAction.DeleteCharRight);
+        fctb.HotkeysMapping.Add(Keys.F3, FCTBAction.FindNext);
+
+        // --- Shift + Клавиши (Выделение и правка) ---
+        fctb.HotkeysMapping.Add(Keys.Tab | Keys.Shift, FCTBAction.IndentDecrease);
+        fctb.HotkeysMapping.Add(Keys.PageUp | Keys.Shift, FCTBAction.GoPageUpWithSelection);
+        fctb.HotkeysMapping.Add(Keys.PageDown | Keys.Shift, FCTBAction.GoPageDownWithSelection);
+        fctb.HotkeysMapping.Add(Keys.End | Keys.Shift, FCTBAction.GoEndWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Home | Keys.Shift, FCTBAction.GoHomeWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Left | Keys.Shift, FCTBAction.GoLeftWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Up | Keys.Shift, FCTBAction.GoUpWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Right | Keys.Shift, FCTBAction.GoRightWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Down | Keys.Shift, FCTBAction.GoDownWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Insert | Keys.Shift, FCTBAction.Paste);
+        fctb.HotkeysMapping.Add(Keys.Delete | Keys.Shift, FCTBAction.Cut);
+
+        // --- CTRL + Клавиши (Навигация и Буфер) ---
+        fctb.HotkeysMapping.Add(Keys.Back | Keys.Control, FCTBAction.ClearWordLeft); 
+
+        fctb.HotkeysMapping.Add(Keys.Space | Keys.Control, FCTBAction.AutocompleteMenu);
+        fctb.HotkeysMapping.Add(Keys.End | Keys.Control, FCTBAction.GoLastLine);
+        fctb.HotkeysMapping.Add(Keys.Home | Keys.Control, FCTBAction.GoFirstLine);
+        fctb.HotkeysMapping.Add(Keys.Left | Keys.Control, FCTBAction.GoWordLeft);
+        fctb.HotkeysMapping.Add(Keys.Right | Keys.Control, FCTBAction.GoWordRight);
+        fctb.HotkeysMapping.Add(Keys.Up | Keys.Control, FCTBAction.ScrollUp);
+        fctb.HotkeysMapping.Add(Keys.Down | Keys.Control, FCTBAction.ScrollDown);
+        fctb.HotkeysMapping.Add(Keys.Insert | Keys.Control, FCTBAction.Copy);
+        fctb.HotkeysMapping.Add(Keys.Delete | Keys.Control, FCTBAction.ClearWordRight);
+
+        // --- CTRL + Буквы (Стандартные команды) ---
+        fctb.HotkeysMapping.Add(Keys.D0 | Keys.Control, FCTBAction.ZoomNormal);
+        fctb.HotkeysMapping.Add(Keys.A | Keys.Control, FCTBAction.SelectAll);
+        fctb.HotkeysMapping.Add(Keys.B | Keys.Control, FCTBAction.BookmarkLine);
         fctb.HotkeysMapping.Add(Keys.C | Keys.Control, FCTBAction.Copy);
+        fctb.HotkeysMapping.Add(Keys.E | Keys.Control, FCTBAction.MacroExecute);
+        fctb.HotkeysMapping.Add(Keys.F | Keys.Control, FCTBAction.FindDialog);
+        fctb.HotkeysMapping.Add(Keys.G | Keys.Control, FCTBAction.GoToDialog);
+        fctb.HotkeysMapping.Add(Keys.H | Keys.Control, FCTBAction.ReplaceDialog);
+        fctb.HotkeysMapping.Add(Keys.I | Keys.Control, FCTBAction.AutoIndentChars);
+        fctb.HotkeysMapping.Add(Keys.M | Keys.Control, FCTBAction.MacroRecord);
+        fctb.HotkeysMapping.Add(Keys.N | Keys.Control, FCTBAction.GoNextBookmark);
+        fctb.HotkeysMapping.Add(Keys.R | Keys.Control, FCTBAction.Redo);
+        fctb.HotkeysMapping.Add(Keys.U | Keys.Control, FCTBAction.UpperCase);
         fctb.HotkeysMapping.Add(Keys.V | Keys.Control, FCTBAction.Paste);
         fctb.HotkeysMapping.Add(Keys.X | Keys.Control, FCTBAction.Cut);
-        fctb.HotkeysMapping.Add(Keys.A | Keys.Control, FCTBAction.SelectAll);
         fctb.HotkeysMapping.Add(Keys.Z | Keys.Control, FCTBAction.Undo);
-        fctb.HotkeysMapping.Add(Keys.Y | Keys.Control, FCTBAction.Redo);
 
-// Поиск и замена
-        fctb.HotkeysMapping.Add(Keys.F | Keys.Control, FCTBAction.FindDialog);
-        fctb.HotkeysMapping.Add(Keys.H | Keys.Control, FCTBAction.ReplaceDialog);
+        // --- Клавиатура Zoom и Навигация ---
+        fctb.HotkeysMapping.Add(Keys.Add | Keys.Control, FCTBAction.ZoomIn);
+        fctb.HotkeysMapping.Add(Keys.Subtract | Keys.Control, FCTBAction.ZoomOut);
+        fctb.HotkeysMapping.Add(Keys.OemMinus | Keys.Control, FCTBAction.NavigateBackward);
 
-// Навигация и строки
-        fctb.HotkeysMapping.Add(Keys.G | Keys.Control, FCTBAction.GoToDialog);
+        // --- CTRL + SHIFT ---
+        fctb.HotkeysMapping.Add(Keys.End | Keys.Control | Keys.Shift, FCTBAction.GoLastLineWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Home | Keys.Control | Keys.Shift, FCTBAction.GoFirstLineWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Left | Keys.Control | Keys.Shift, FCTBAction.GoWordLeftWithSelection);
+        fctb.HotkeysMapping.Add(Keys.Right | Keys.Control | Keys.Shift, FCTBAction.GoWordRightWithSelection);
+        fctb.HotkeysMapping.Add(Keys.B | Keys.Control | Keys.Shift, FCTBAction.UnbookmarkLine);
+        fctb.HotkeysMapping.Add(Keys.C | Keys.Control | Keys.Shift, FCTBAction.CommentSelected);
+        fctb.HotkeysMapping.Add(Keys.N | Keys.Control | Keys.Shift, FCTBAction.GoPrevBookmark);
+        fctb.HotkeysMapping.Add(Keys.U | Keys.Control | Keys.Shift, FCTBAction.LowerCase);
+        fctb.HotkeysMapping.Add(Keys.OemMinus | Keys.Control | Keys.Shift, FCTBAction.NavigateForward);
 
-// Отступы
-        fctb.HotkeysMapping.Add(Keys.Tab, FCTBAction.IndentIncrease);
-        fctb.HotkeysMapping.Add(Keys.Tab | Keys.Shift, FCTBAction.IndentDecrease);
-        // --- КОНЕЦ НАСТРОЙКИ ---
+        // --- ALT + Клавиши ---
+        fctb.HotkeysMapping.Add(Keys.Back | Keys.Alt, FCTBAction.Undo); 
+
+        fctb.HotkeysMapping.Add(Keys.Up | Keys.Alt, FCTBAction.MoveSelectedLinesUp);
+        fctb.HotkeysMapping.Add(Keys.Down | Keys.Alt, FCTBAction.MoveSelectedLinesDown);
+        fctb.HotkeysMapping.Add(Keys.F | Keys.Alt, FCTBAction.FindChar);
+
+        // --- ALT + SHIFT (Колоночное выделение) ---
+        fctb.HotkeysMapping.Add(Keys.Left | Keys.Alt | Keys.Shift, FCTBAction.GoLeft_ColumnSelectionMode);
+        fctb.HotkeysMapping.Add(Keys.Up | Keys.Alt | Keys.Shift, FCTBAction.GoUp_ColumnSelectionMode);
+        fctb.HotkeysMapping.Add(Keys.Right | Keys.Alt | Keys.Shift, FCTBAction.GoRight_ColumnSelectionMode);
+        fctb.HotkeysMapping.Add(Keys.Down | Keys.Alt | Keys.Shift, FCTBAction.GoDown_ColumnSelectionMode);
 
         newTabPage.Controls.Add(fctb);
         tabControlEditor.TabPages.Add(newTabPage);
         tabControlEditor.SelectedTab = newTabPage;
-        
-        // Сбрасываем флаг изменений, так как файл только что создан/открыт
         fctb.IsChanged = false;
 
         return fctb;
     }
     private FastColoredTextBox CurrentEditor => 
         tabControlEditor.SelectedTab?.Controls[0] as FastColoredTextBox;
+
+   
 }
