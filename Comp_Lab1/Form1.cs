@@ -133,7 +133,6 @@ public partial class Form1 : Form
 
         if (System.IO.File.Exists(helpPath))
         {
-            // Запускаем файл через системный браузер по умолчанию
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(helpPath) 
             { 
                 UseShellExecute = true 
@@ -384,27 +383,22 @@ public partial class Form1 : Form
         ChangeLanguage("en-US");
     }
 
-// Обработчик для кнопки "Русский"
     private void russianToolStripMenuItem_Click(object sender, EventArgs e)
     {
         ChangeLanguage("ru-RU");
     }
     private void ChangeLanguage(string cultureName)
     {
-        // Меняем культуру интерфейса для всего приложения
         System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(cultureName);
         System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
 
-        // Вызываем ваш метод, который переназначит тексты всем кнопкам и меню
         ApplyLocalization();
 
-        // Дополнительно: если у вас есть открытые вкладки "Новый файл", 
-        // их названия тоже можно обновить здесь через цикл
         foreach (TabPage tab in tabControlEditor.TabPages)
         {
             if (tab.Tag != null && string.IsNullOrEmpty(tab.Tag.ToString()))
             {
-                tab.Text = Label.NewFile; // Не забудьте добавить ключ NewFile в ресурсы
+                tab.Text = Label.NewFile; 
             }
         }
     }
