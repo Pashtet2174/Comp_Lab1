@@ -129,7 +129,20 @@ public partial class Form1 : Form
     }
 
     private void ShowHelp(object sender, EventArgs e) {
-        MessageBox.Show("Руководство пользователя:\n1. Используйте меню Файл для работы с документами.\n2. Правка - для редактирования.\n3. Кнопка 'Пуск' запустит анализ кода.", "Справка");
+        string helpPath = System.IO.Path.Combine(Application.StartupPath, "help.html");
+
+        if (System.IO.File.Exists(helpPath))
+        {
+            // Запускаем файл через системный браузер по умолчанию
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(helpPath) 
+            { 
+                UseShellExecute = true 
+            });
+        }
+        else
+        {
+            MessageBox.Show("Файл справки (help.html) не найден в папке с программой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
     private void Undo_Click(object sender, EventArgs e) {
         if (CurrentEditor.UndoEnabled) CurrentEditor.Undo();

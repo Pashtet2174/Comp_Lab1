@@ -36,4 +36,10 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Help.html">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
