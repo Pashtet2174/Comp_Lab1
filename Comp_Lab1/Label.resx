@@ -123,14 +123,26 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Компилятор</value>
   </data>
+  <data name="colCode" xml:space="preserve">
+    <value>Код</value>
+  </data>
   <data name="ColFile" xml:space="preserve">
     <value>Файл</value>
+  </data>
+  <data name="colLexeme" xml:space="preserve">
+    <value>Лексема</value>
   </data>
   <data name="ColLine" xml:space="preserve">
     <value>Строка</value>
   </data>
   <data name="ColMessage" xml:space="preserve">
     <value>Описание</value>
+  </data>
+  <data name="colPos" xml:space="preserve">
+    <value>Местоположение</value>
+  </data>
+  <data name="colType" xml:space="preserve">
+    <value>Тип лексемы</value>
   </data>
   <data name="LangEn" xml:space="preserve">
     <value>Английский</value>
@@ -147,14 +159,12 @@
   <data name="MenuCopy" xml:space="preserve">
     <value>Копировать</value>
   </data>
-  
   <data name="MenuCreate" xml:space="preserve">
     <value>Создать</value>
   </data>
   <data name="MenuCut" xml:space="preserve">
     <value>Вырезать</value>
   </data>
-  
   <data name="MenuDelete" xml:space="preserve">
     <value>Удалить</value>
   </data>
@@ -221,10 +231,37 @@
   <data name="MenuUndo" xml:space="preserve">
     <value>Отменить</value>
   </data>
+  <data name="MsgLine" xml:space="preserve">
+    <value>стр.</value>
+  </data>
   <data name="NewFile" xml:space="preserve">
     <value>Новый файл</value>
 </data>
   <data name="StatusReady" xml:space="preserve">
     <value>Готов</value>
+  </data>
+  <data name="TypeAssign" xml:space="preserve">
+    <value>оператор присваивания</value>
+  </data>
+  <data name="TypeErrorString" xml:space="preserve">
+    <value>ОШИБКА: незакрытая строка</value>
+  </data>
+  <data name="TypeErrorSymbol" xml:space="preserve">
+    <value>ОШИБКА: недопустимый символ</value>
+  </data>
+  <data name="TypeIdentifier" xml:space="preserve">
+    <value>идентификатор</value>
+  </data>
+  <data name="TypeKeyword" xml:space="preserve">
+    <value>ключевое слово</value>
+  </data>
+  <data name="TypeSemicolon" xml:space="preserve">
+    <value>конец оператора</value>
+  </data>
+  <data name="TypeString" xml:space="preserve">
+    <value>строковая константа</value>
+  </data>
+  <data name="TypeWhitespace" xml:space="preserve">
+    <value>пробел</value>
   </data>
 </root>

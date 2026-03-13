@@ -76,11 +76,12 @@ partial class Form1
         splitContainer1 = new System.Windows.Forms.SplitContainer();
         tabControlEditor = new System.Windows.Forms.TabControl();
         dgvErrors = new System.Windows.Forms.DataGridView();
-        colFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        colLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        colMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
         statusStrip1 = new System.Windows.Forms.StatusStrip();
         lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+        colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        colType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        colLexeme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        colPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
         menuStrip1.SuspendLayout();
         toolStrip1.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -99,10 +100,10 @@ partial class Form1
         menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { файлToolStripMenuItem, текстToolStripMenuItem, текстToolStripMenuItem1, пускToolStripMenuItem, справкаToolStripMenuItem, языкToolStripMenuItem });
         menuStrip1.Location = new System.Drawing.Point(0, 0);
-        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3289);
+        menuStrip1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8030);
         menuStrip1.Name = "menuStrip1";
         menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-        menuStrip1.Size = new System.Drawing.Size(612, 29);
+        menuStrip1.Size = new System.Drawing.Size(1056, 29);
         menuStrip1.TabIndex = 0;
         menuStrip1.Text = "menuStrip1";
         // 
@@ -118,7 +119,7 @@ partial class Form1
         создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
         создатьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N));
         создатьToolStripMenuItem.ShowShortcutKeys = false;
-        создатьToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        создатьToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
         создатьToolStripMenuItem.Text = "Создать";
         создатьToolStripMenuItem.Click += CreateFile;
         // 
@@ -127,7 +128,7 @@ partial class Form1
         открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
         открытьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O));
         открытьToolStripMenuItem.ShowShortcutKeys = false;
-        открытьToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        открытьToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
         открытьToolStripMenuItem.Text = "Открыть";
         открытьToolStripMenuItem.Click += OpenFile;
         // 
@@ -136,21 +137,21 @@ partial class Form1
         сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
         сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S));
         сохранитьToolStripMenuItem.ShowShortcutKeys = false;
-        сохранитьToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        сохранитьToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
         сохранитьToolStripMenuItem.Text = "Сохранить";
         сохранитьToolStripMenuItem.Click += SaveFile;
         // 
         // сохранитьКакToolStripMenuItem
         // 
         сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-        сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
         сохранитьКакToolStripMenuItem.Text = "Сохранить как";
         сохранитьКакToolStripMenuItem.Click += SaveFileAs;
         // 
         // выходToolStripMenuItem
         // 
         выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-        выходToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        выходToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
         выходToolStripMenuItem.Text = "Выход";
         выходToolStripMenuItem.Click += ExitApp;
         // 
@@ -305,14 +306,14 @@ partial class Form1
         // русскийToolStripMenuItem
         // 
         русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-        русскийToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        русскийToolStripMenuItem.Size = new System.Drawing.Size(193, 30);
         русскийToolStripMenuItem.Text = "Русский";
         русскийToolStripMenuItem.Click += russianToolStripMenuItem_Click;
         // 
         // английскийToolStripMenuItem
         // 
         английскийToolStripMenuItem.Name = "английскийToolStripMenuItem";
-        английскийToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+        английскийToolStripMenuItem.Size = new System.Drawing.Size(193, 30);
         английскийToolStripMenuItem.Text = "Английский";
         английскийToolStripMenuItem.Click += englishToolStripMenuItem_Click;
         // 
@@ -325,7 +326,7 @@ partial class Form1
         toolStrip1.Location = new System.Drawing.Point(0, 29);
         toolStrip1.Name = "toolStrip1";
         toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-        toolStrip1.Size = new System.Drawing.Size(612, 47);
+        toolStrip1.Size = new System.Drawing.Size(1056, 47);
         toolStrip1.TabIndex = 0;
         toolStrip1.Text = "toolStrip1";
         // 
@@ -447,7 +448,7 @@ partial class Form1
         splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
         splitContainer1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
         splitContainer1.Location = new System.Drawing.Point(0, 76);
-        splitContainer1.Margin = new System.Windows.Forms.Padding(25836696, 3, 25836696, 3);
+        splitContainer1.Margin = new System.Windows.Forms.Padding(63077872, 8, 63077872, 8);
         splitContainer1.Name = "splitContainer1";
         splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
         // 
@@ -458,9 +459,9 @@ partial class Form1
         // splitContainer1.Panel2
         // 
         splitContainer1.Panel2.Controls.Add(dgvErrors);
-        splitContainer1.Size = new System.Drawing.Size(612, 764);
-        splitContainer1.SplitterDistance = 320;
-        splitContainer1.SplitterWidth = 99;
+        splitContainer1.Size = new System.Drawing.Size(1056, 630);
+        splitContainer1.SplitterDistance = 263;
+        splitContainer1.SplitterWidth = 242;
         splitContainer1.TabIndex = 2;
         splitContainer1.Text = "splitContainer1";
         // 
@@ -469,10 +470,10 @@ partial class Form1
         tabControlEditor.AllowDrop = true;
         tabControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
         tabControlEditor.Location = new System.Drawing.Point(0, 0);
-        tabControlEditor.Margin = new System.Windows.Forms.Padding(303, 3, 303, 3);
+        tabControlEditor.Margin = new System.Windows.Forms.Padding(740, 8, 740, 8);
         tabControlEditor.Name = "tabControlEditor";
         tabControlEditor.SelectedIndex = 0;
-        tabControlEditor.Size = new System.Drawing.Size(612, 320);
+        tabControlEditor.Size = new System.Drawing.Size(1056, 263);
         tabControlEditor.TabIndex = 0;
         tabControlEditor.DragDrop += Form1_DragDrop;
         tabControlEditor.DragEnter += Form1_DragEnter;
@@ -480,10 +481,10 @@ partial class Form1
         // dgvErrors
         // 
         dgvErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgvErrors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { colFile, colLine, colMessage });
+        dgvErrors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { colCode, colType, colLexeme, colPos });
         dgvErrors.Dock = System.Windows.Forms.DockStyle.Fill;
         dgvErrors.Location = new System.Drawing.Point(0, 0);
-        dgvErrors.Margin = new System.Windows.Forms.Padding(60, 3, 60, 3);
+        dgvErrors.Margin = new System.Windows.Forms.Padding(148, 8, 148, 8);
         dgvErrors.Name = "dgvErrors";
         dgvErrors.ReadOnly = true;
         dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
@@ -495,44 +496,19 @@ partial class Form1
         dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         dgvErrors.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgvErrors.RowHeadersWidth = 51;
-        dgvErrors.Size = new System.Drawing.Size(612, 345);
+        dgvErrors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        dgvErrors.Size = new System.Drawing.Size(1056, 125);
         dgvErrors.TabIndex = 0;
         dgvErrors.Text = "dataGridView1";
-        // 
-        // colFile
-        // 
-        colFile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-        colFile.HeaderText = "Файл";
-        colFile.MinimumWidth = 6;
-        colFile.Name = "colFile";
-        colFile.ReadOnly = true;
-        colFile.Width = 82;
-        // 
-        // colLine
-        // 
-        colLine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-        colLine.HeaderText = "Строка";
-        colLine.MinimumWidth = 6;
-        colLine.Name = "colLine";
-        colLine.ReadOnly = true;
-        colLine.Width = 99;
-        // 
-        // colMessage
-        // 
-        colMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-        colMessage.HeaderText = "Описание";
-        colMessage.MinimumWidth = 6;
-        colMessage.Name = "colMessage";
-        colMessage.ReadOnly = true;
         // 
         // statusStrip1
         // 
         statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { lblStatus });
-        statusStrip1.Location = new System.Drawing.Point(0, 818);
+        statusStrip1.Location = new System.Drawing.Point(0, 684);
         statusStrip1.Name = "statusStrip1";
-        statusStrip1.Padding = new System.Windows.Forms.Padding(12, 0, 135, 0);
-        statusStrip1.Size = new System.Drawing.Size(612, 22);
+        statusStrip1.Padding = new System.Windows.Forms.Padding(30, 0, 330, 0);
+        statusStrip1.Size = new System.Drawing.Size(1056, 22);
         statusStrip1.TabIndex = 1;
         // 
         // lblStatus
@@ -541,12 +517,46 @@ partial class Form1
         lblStatus.Name = "lblStatus";
         lblStatus.Size = new System.Drawing.Size(0, 16);
         // 
+        // colCode
+        // 
+        colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+        colCode.HeaderText = "Условный код";
+        colCode.MinimumWidth = 6;
+        colCode.Name = "colCode";
+        colCode.ReadOnly = true;
+        colCode.Width = 157;
+        // 
+        // colType
+        // 
+        colType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+        colType.HeaderText = "Тип лексемы";
+        colType.MinimumWidth = 6;
+        colType.Name = "colType";
+        colType.ReadOnly = true;
+        // 
+        // colLexeme
+        // 
+        colLexeme.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+        colLexeme.HeaderText = "Лексема";
+        colLexeme.MinimumWidth = 6;
+        colLexeme.Name = "colLexeme";
+        colLexeme.ReadOnly = true;
+        // 
+        // colPos
+        // 
+        colPos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+        colPos.HeaderText = "Местоположение";
+        colPos.MinimumWidth = 6;
+        colPos.Name = "colPos";
+        colPos.ReadOnly = true;
+        colPos.Width = 184;
+        // 
         // Form1
         // 
         AllowDrop = true;
         AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(612, 840);
+        ClientSize = new System.Drawing.Size(1056, 706);
         Controls.Add(statusStrip1);
         Controls.Add(splitContainer1);
         Controls.Add(toolStrip1);
@@ -555,6 +565,7 @@ partial class Form1
         ForeColor = System.Drawing.SystemColors.AppWorkspace;
         Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));
         MainMenuStrip = menuStrip1;
+        Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
         MinimumSize = new System.Drawing.Size(586, 648);
         Text = "Компилятор";
         FormClosing += Form1_FormClosing;
@@ -575,6 +586,11 @@ partial class Form1
         PerformLayout();
     }
 
+    private System.Windows.Forms.DataGridViewTextBoxColumn colCode;
+    private System.Windows.Forms.DataGridViewTextBoxColumn colType;
+    private System.Windows.Forms.DataGridViewTextBoxColumn colLexeme;
+    private System.Windows.Forms.DataGridViewTextBoxColumn colPos;
+
     private System.Windows.Forms.ToolStripMenuItem языкToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem английскийToolStripMenuItem;
@@ -582,10 +598,6 @@ partial class Form1
     private System.Windows.Forms.ToolStripStatusLabel lblStatus;
 
     private System.Windows.Forms.StatusStrip statusStrip1;
-
-    private System.Windows.Forms.DataGridViewTextBoxColumn colFile;
-    private System.Windows.Forms.DataGridViewTextBoxColumn colLine;
-    private System.Windows.Forms.DataGridViewTextBoxColumn colMessage;
 
     private System.Windows.Forms.DataGridView dgvErrors;
 

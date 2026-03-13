@@ -120,14 +120,26 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Compiler</value>
   </data>
+  <data name="colCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
   <data name="ColFile" xml:space="preserve">
     <value>File</value>
+  </data>
+  <data name="colLexeme" xml:space="preserve">
+    <value>Lexeme</value>
   </data>
   <data name="ColLine" xml:space="preserve">
     <value>Line</value>
   </data>
   <data name="ColMessage" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="colPos" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="colType" xml:space="preserve">
+    <value>Token Type</value>
   </data>
   <data name="LangEn" xml:space="preserve">
     <value>English</value>
@@ -216,10 +228,37 @@
   <data name="MenuUndo" xml:space="preserve">
     <value>Undo</value>
   </data>
+  <data name="MsgLine" xml:space="preserve">
+    <value>line</value>
+  </data>
   <data name="NewFile" xml:space="preserve">
     <value>New file</value>
 </data>
   <data name="StatusReady" xml:space="preserve">
     <value>Ready</value>
+  </data>
+  <data name="TypeAssign" xml:space="preserve">
+    <value>assignment operator</value>
+  </data>
+  <data name="TypeErrorString" xml:space="preserve">
+    <value>ERROR: unclosed string</value>
+  </data>
+  <data name="TypeErrorSymbol" xml:space="preserve">
+    <value>ERROR: invalid character</value>
+  </data>
+  <data name="TypeIdentifier" xml:space="preserve">
+    <value>identifier</value>
+  </data>
+  <data name="TypeKeyword" xml:space="preserve">
+    <value>keyword</value>
+  </data>
+  <data name="TypeSemicolon" xml:space="preserve">
+    <value>semicolon</value>
+  </data>
+  <data name="TypeString" xml:space="preserve">
+    <value>string constant</value>
+  </data>
+  <data name="TypeWhitespace" xml:space="preserve">
+    <value>whitespace</value>
   </data>
 </root>

@@ -1,9 +1,12 @@
+using System.Text.RegularExpressions;
 using FastColoredTextBoxNS;
 
 namespace Comp_Lab1;
 
 public partial class Form1 : Form
 {
+    Style BlueStyle = new TextStyle(Brushes.Blue, null, FontStyle.Bold);
+    Style BrownStyle = new TextStyle(Brushes.Brown, null, FontStyle.Regular); 
     public Form1()
     {
         InitializeComponent();
@@ -14,6 +17,7 @@ public partial class Form1 : Form
         dgvErrors.MouseWheel += DgvErrors_MouseWheel;
         EnableDragDropForAll(this);
         ApplyLocalization();
+        dgvErrors.CellClick += dgvErrors_CellClick;
     }
     private void EnableDragDropForAll(Control parent)
     {
@@ -114,15 +118,24 @@ public partial class Form1 : Form
     }
     private void RunParser(object sender = null, EventArgs e = null) 
     {
-        if (tabControlEditor.TabPages.Count == 0 || CurrentEditor == null)
+        if (CurrentEditor == null) return;
+
+        dgvErrors.Rows.Clear();
+        var scanner = new Scanner(CurrentEditor.Text);
+        var tokens = scanner.Analyze();
+
+        foreach (var t in tokens)
         {
-            MessageBox.Show("Сначала создайте или откройте файл для анализа!", 
-                "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
+            string location = $"{Label.MsgLine} {t.Line}, {t.StartPos}-{t.EndPos}";
+            int rowIndex = dgvErrors.Rows.Add(t.Code, t.TypeName, t.Value, location);
+            dgvErrors.Rows[rowIndex].Tag = t;
+
+            if (t.Code == 99)
+            {
+                dgvErrors.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
+                dgvErrors.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Black;
+            }
         }
-        string resultMessage = "Ошибок не обнаружено.";
-        lblStatus.Text = "Анализ завершен.";
-        MessageBox.Show(resultMessage, "Результат анализа", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     private void ShowAbout(object sender, EventArgs e) {
         MessageBox.Show("Текстовый редактор / Языковой процессор\nВерсия 1.0\nРазработчик: Обеленец Павел", "О программе");
@@ -181,7 +194,7 @@ public partial class Form1 : Form
         newTabPage.Tag = (fileName == "Новый файл") ? "" : fileName;
         FastColoredTextBox fctb = new FastColoredTextBox();
         fctb.Dock = DockStyle.Fill;
-        fctb.Language = FastColoredTextBoxNS.Language.CSharp;
+        fctb.Language = FastColoredTextBoxNS.Language.Custom;
         fctb.Text = content;
 
         fctb.HotkeysMapping.Clear();
@@ -282,6 +295,7 @@ public partial class Form1 : Form
             int line = fctb.Selection.Start.iLine + 1;
             lblStatus.Text = $"Строка: {line}| Всего строк: {fctb.LinesCount}";
         };
+        fctb.TextChanged += OnTextChanged;
         return fctb;
     }
     private FastColoredTextBox CurrentEditor => 
@@ -358,9 +372,10 @@ public partial class Form1 : Form
         toolStripButton8.Text = Label.MenuAbout;
 
         // Таблица ошибок
-        colFile.HeaderText = Label.ColFile;
-        colLine.HeaderText = Label.ColLine;
-        colMessage.HeaderText = Label.ColMessage;
+        colCode.HeaderText = Label.colCode;
+        colType.HeaderText = Label.colType;
+        colLexeme.HeaderText = Label.colLexeme;
+        colPos.HeaderText = Label.colPos;
         // Кнопки на ToolStrip (текст всплывающих подсказок)
         toolStripButton4.Text = Label.MenuUndo;
         toolStripButton5.Text = Label.MenuRedo;
@@ -401,5 +416,35 @@ public partial class Form1 : Form
                 tab.Text = Label.NewFile; 
             }
         }
+    }
+    
+    private void dgvErrors_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.RowIndex >= 0 && dgvErrors.Rows[e.RowIndex].Tag is Token token)
+        {
+            if (CurrentEditor == null) return;
+
+            int lineIndex = token.Line - 1;
+            int charIndexInLine = token.StartPos - 1;
+
+            try
+            {
+                FastColoredTextBoxNS.Place place = new FastColoredTextBoxNS.Place(charIndexInLine, lineIndex);
+                CurrentEditor.Focus();
+                CurrentEditor.SelectionStart = CurrentEditor.PlaceToPosition(place);
+                CurrentEditor.SelectionLength = (token.EndPos - token.StartPos) + 1;
+                CurrentEditor.DoSelectionVisible();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Ошибка навигации: " + ex.Message);
+            }
+        }
+    }
+    private void OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        e.ChangedRange.ClearStyle(BlueStyle, BrownStyle);
+        e.ChangedRange.SetStyle(BrownStyle, @"""""|@""[^""]*""|""[^""\\]*(?:\\.[^""\\]*)*""");
+        e.ChangedRange.SetStyle(BlueStyle, @"\b(const|val)\b");
     }
 }

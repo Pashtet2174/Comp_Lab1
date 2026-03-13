@@ -69,11 +69,29 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Код.
+        /// </summary>
+        internal static string colCode {
+            get {
+                return ResourceManager.GetString("colCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Файл.
         /// </summary>
         internal static string ColFile {
             get {
                 return ResourceManager.GetString("ColFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лексема.
+        /// </summary>
+        internal static string colLexeme {
+            get {
+                return ResourceManager.GetString("colLexeme", resourceCulture);
             }
         }
         
@@ -92,6 +110,24 @@ namespace Comp_Lab1 {
         internal static string ColMessage {
             get {
                 return ResourceManager.GetString("ColMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Местоположение.
+        /// </summary>
+        internal static string colPos {
+            get {
+                return ResourceManager.GetString("colPos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип лексемы.
+        /// </summary>
+        internal static string colType {
+            get {
+                return ResourceManager.GetString("colType", resourceCulture);
             }
         }
         
@@ -357,6 +393,15 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to стр..
+        /// </summary>
+        internal static string MsgLine {
+            get {
+                return ResourceManager.GetString("MsgLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Новый файл.
         /// </summary>
         internal static string NewFile {
@@ -371,6 +416,78 @@ namespace Comp_Lab1 {
         internal static string StatusReady {
             get {
                 return ResourceManager.GetString("StatusReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to оператор присваивания.
+        /// </summary>
+        internal static string TypeAssign {
+            get {
+                return ResourceManager.GetString("TypeAssign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ОШИБКА: незакрытая строка.
+        /// </summary>
+        internal static string TypeErrorString {
+            get {
+                return ResourceManager.GetString("TypeErrorString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ОШИБКА: недопустимый символ.
+        /// </summary>
+        internal static string TypeErrorSymbol {
+            get {
+                return ResourceManager.GetString("TypeErrorSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to идентификатор.
+        /// </summary>
+        internal static string TypeIdentifier {
+            get {
+                return ResourceManager.GetString("TypeIdentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ключевое слово.
+        /// </summary>
+        internal static string TypeKeyword {
+            get {
+                return ResourceManager.GetString("TypeKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to конец оператора.
+        /// </summary>
+        internal static string TypeSemicolon {
+            get {
+                return ResourceManager.GetString("TypeSemicolon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to строковая константа.
+        /// </summary>
+        internal static string TypeString {
+            get {
+                return ResourceManager.GetString("TypeString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to пробел.
+        /// </summary>
+        internal static string TypeWhitespace {
+            get {
+                return ResourceManager.GetString("TypeWhitespace", resourceCulture);
             }
         }
     }
