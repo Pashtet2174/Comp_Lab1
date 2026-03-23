@@ -126,8 +126,8 @@
   <data name="ColFile" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="colLexeme" xml:space="preserve">
-    <value>Lexeme</value>
+  <data name="colFragment" xml:space="preserve">
+    <value>Invalid fragment</value>
   </data>
   <data name="ColLine" xml:space="preserve">
     <value>Line</value>

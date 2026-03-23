@@ -1,14 +1,17 @@
 using System.Text.RegularExpressions;
+using Antlr4.Runtime;
+using Comp_Lab1;
 using FastColoredTextBoxNS;
-
 namespace Comp_Lab1;
 
 public partial class Form1 : Form
 {
     Style BlueStyle = new TextStyle(Brushes.Blue, null, FontStyle.Bold);
     Style BrownStyle = new TextStyle(Brushes.Brown, null, FontStyle.Regular); 
+    
     public Form1()
     {
+        
         InitializeComponent();
         this.AllowDrop = true;
         this.DragEnter += Form1_DragEnter;
@@ -116,26 +119,48 @@ public partial class Form1 : Form
             }
         }
     }
+
     private void RunParser(object sender = null, EventArgs e = null) 
     {
         if (CurrentEditor == null) return;
-
         dgvErrors.Rows.Clear();
+
         var scanner = new Scanner(CurrentEditor.Text);
-        var tokens = scanner.Analyze();
+        var allTokens = scanner.Analyze();
 
-        foreach (var t in tokens)
+        var parser = new Parser(allTokens);
+        parser.Analyze();
+        
+        foreach (var err in parser.Errors)
         {
-            string location = $"{Label.MsgLine} {t.Line}, {t.StartPos}-{t.EndPos}";
-            int rowIndex = dgvErrors.Rows.Add(t.Code, t.TypeName, t.Value, location);
-            dgvErrors.Rows[rowIndex].Tag = t;
-
-            if (t.Code == 99)
-            {
-                dgvErrors.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
-                dgvErrors.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Black;
-            }
+            AddErrorToGrid( err.Message, err.Token.Value, err.Token);
         }
+
+        int totalErrors =  parser.Errors.Count;
+
+        if (totalErrors == 0)
+        {
+            lblStatus.Text = "Синтаксический анализ: Ошибок нет.";
+            lblStatus.ForeColor = Color.Green;
+            MessageBox.Show("Анализ завершен успешно. Ошибок не обнаружено!", 
+                "Результат анализа", 
+                MessageBoxButtons.OK, 
+                MessageBoxIcon.Information);
+        }
+        else
+        {
+            lblStatus.Text = $"Общее количество ошибок: {totalErrors}";
+            lblStatus.ForeColor = Color.Red; 
+        }
+    }
+    private void AddErrorToGrid( string typeName, string value, Token token)
+    {
+        string location = $"строка {token.Line}, поз. {token.StartPos}";
+        int rowIndex = dgvErrors.Rows.Add( value, location, typeName);
+        dgvErrors.Rows[rowIndex].Tag = token;
+
+        dgvErrors.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
+        dgvErrors.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Black;
     }
     private void ShowAbout(object sender, EventArgs e) {
         MessageBox.Show("Текстовый редактор / Языковой процессор\nВерсия 1.0\nРазработчик: Обеленец Павел", "О программе");
@@ -372,10 +397,9 @@ public partial class Form1 : Form
         toolStripButton8.Text = Label.MenuAbout;
 
         // Таблица ошибок
-        colCode.HeaderText = Label.colCode;
-        colType.HeaderText = Label.colType;
-        colLexeme.HeaderText = Label.colLexeme;
+        colFragment.HeaderText = Label.colFragment;
         colPos.HeaderText = Label.colPos;
+        ColMessage.HeaderText = Label.ColMessage;
         // Кнопки на ToolStrip (текст всплывающих подсказок)
         toolStripButton4.Text = Label.MenuUndo;
         toolStripButton5.Text = Label.MenuRedo;

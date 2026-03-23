@@ -87,11 +87,11 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Лексема.
+        ///   Looks up a localized string similar to Неверный фрагмент.
         /// </summary>
-        internal static string colLexeme {
+        internal static string colFragment {
             get {
-                return ResourceManager.GetString("colLexeme", resourceCulture);
+                return ResourceManager.GetString("colFragment", resourceCulture);
             }
         }
         

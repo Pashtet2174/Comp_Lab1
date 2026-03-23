@@ -129,8 +129,8 @@
   <data name="ColFile" xml:space="preserve">
     <value>Файл</value>
   </data>
-  <data name="colLexeme" xml:space="preserve">
-    <value>Лексема</value>
+  <data name="colFragment" xml:space="preserve">
+    <value>Неверный фрагмент</value>
   </data>
   <data name="ColLine" xml:space="preserve">
     <value>Строка</value>
