@@ -125,32 +125,56 @@ public partial class Form1 : Form
         if (CurrentEditor == null) return;
         dgvErrors.Rows.Clear();
 
-        var scanner = new Scanner(CurrentEditor.Text);
-        var allTokens = scanner.Analyze();
+            try 
+            {
+                // 1. Подготовка входного потока
+                AntlrInputStream inputStream = new AntlrInputStream(CurrentEditor.Text);
+            
+                // 2. Лексер
+                KotlinVarLexer lexer = new KotlinVarLexer(inputStream);
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+            
+                // 3. Парсер
+                KotlinVarParser parser = new KotlinVarParser(tokens);
+            
+                // 4. Настройка перехвата ошибок
+                parser.RemoveErrorListeners();
+                var errorListener = new MyAntlrErrorListener();
+                parser.AddErrorListener(errorListener);
 
-        var parser = new Parser(allTokens);
-        parser.Analyze();
-        
-        foreach (var err in parser.Errors)
-        {
-            AddErrorToGrid( err.Message, err.Token.Value, err.Token);
+                // 5. Запуск анализа (вызываем корневое правило из вашего .g4 файла)
+                parser.program(); 
+
+                // 6. Вывод ошибок в таблицу
+                foreach (var err in errorListener.Errors)
+                {
+                    // Создаем временный объект Token для совместимости с вашим методом CellClick
+                    var tempToken = new Token {
+                        Line = err.Token.Line,
+                        StartPos = err.Token.Column + 1,
+                        EndPos = err.Token.Column + (err.Token.StopIndex - err.Token.StartIndex) + 1,
+                        Value = err.Token.Text ?? ""
+                    };
+                
+                    AddErrorToGrid(err.Message, tempToken.Value, tempToken);
+                }
+
+            // 7. Обновление статуса
+            if (errorListener.Errors.Count == 0)
+            {
+                lblStatus.Text = "ANTLR: Ошибок нет.";
+                lblStatus.ForeColor = Color.Green;
+                MessageBox.Show("Анализ ANTLR завершен успешно!", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                lblStatus.Text = $"ANTLR: Найдено ошибок: {errorListener.Errors.Count}";
+                lblStatus.ForeColor = Color.Red;
+            }
         }
-
-        int totalErrors =  parser.Errors.Count;
-
-        if (totalErrors == 0)
+        catch (Exception ex)
         {
-            lblStatus.Text = "Синтаксический анализ: Ошибок нет.";
-            lblStatus.ForeColor = Color.Green;
-            MessageBox.Show("Анализ завершен успешно. Ошибок не обнаружено!", 
-                "Результат анализа", 
-                MessageBoxButtons.OK, 
-                MessageBoxIcon.Information);
-        }
-        else
-        {
-            lblStatus.Text = $"Общее количество ошибок: {totalErrors}";
-            lblStatus.ForeColor = Color.Red; 
+            MessageBox.Show("Критическая ошибка анализа: " + ex.Message);
         }
     }
     private void AddErrorToGrid( string typeName, string value, Token token)

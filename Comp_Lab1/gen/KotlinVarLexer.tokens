@@ -1,0 +1,11 @@
+CONST=1
+VAL=2
+IDENTIFIER=3
+STRING=4
+ASSIGN=5
+SEMICOLON=6
+WS=7
+'const'=1
+'val'=2
+'='=5
+';'=6
