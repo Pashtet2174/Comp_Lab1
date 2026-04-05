@@ -1,0 +1,11 @@
+CONST_KW=1
+VAL_KW=2
+EQUAL=3
+SEMI=4
+ID=5
+STRING=6
+WS=7
+'const'=1
+'val'=2
+'='=3
+';'=4

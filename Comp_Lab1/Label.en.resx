@@ -241,10 +241,10 @@
     <value>assignment operator</value>
   </data>
   <data name="TypeErrorString" xml:space="preserve">
-    <value>ERROR: unclosed string</value>
+    <value>unclosed string</value>
   </data>
   <data name="TypeErrorSymbol" xml:space="preserve">
-    <value>ERROR: invalid character</value>
+    <value>invalid character</value>
   </data>
   <data name="TypeIdentifier" xml:space="preserve">
     <value>identifier</value>

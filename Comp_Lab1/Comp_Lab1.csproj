@@ -36,6 +36,7 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Label.en.resx</DependentUpon>
       </Compile>
+      <Compile Remove="MyAntlrErrorListener.cs" />
     </ItemGroup>
 
     <ItemGroup>

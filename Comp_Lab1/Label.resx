@@ -244,10 +244,10 @@
     <value>оператор присваивания</value>
   </data>
   <data name="TypeErrorString" xml:space="preserve">
-    <value>ОШИБКА: незакрытая строка</value>
+    <value>незакрытая строка</value>
   </data>
   <data name="TypeErrorSymbol" xml:space="preserve">
-    <value>ОШИБКА: недопустимый символ</value>
+    <value>недопустимый символ</value>
   </data>
   <data name="TypeIdentifier" xml:space="preserve">
     <value>идентификатор</value>

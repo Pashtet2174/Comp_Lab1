@@ -429,7 +429,7 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ERROR: unclosed string.
+        ///   Looks up a localized string similar to unclosed string.
         /// </summary>
         internal static string TypeErrorString {
             get {
@@ -438,7 +438,7 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ERROR: invalid character.
+        ///   Looks up a localized string similar to invalid character.
         /// </summary>
         internal static string TypeErrorSymbol {
             get {

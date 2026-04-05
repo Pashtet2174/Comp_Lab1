@@ -31,23 +31,33 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IKotlinVarListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KotlinVarParser.program"/>.
+	/// Enter a parse tree produced by <see cref="KotlinVarParser.startRule"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterProgram([NotNull] KotlinVarParser.ProgramContext context);
+	void EnterStartRule([NotNull] KotlinVarParser.StartRuleContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KotlinVarParser.program"/>.
+	/// Exit a parse tree produced by <see cref="KotlinVarParser.startRule"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitProgram([NotNull] KotlinVarParser.ProgramContext context);
+	void ExitStartRule([NotNull] KotlinVarParser.StartRuleContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KotlinVarParser.declaration"/>.
+	/// Enter a parse tree produced by <see cref="KotlinVarParser.id"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterDeclaration([NotNull] KotlinVarParser.DeclarationContext context);
+	void EnterId([NotNull] KotlinVarParser.IdContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KotlinVarParser.declaration"/>.
+	/// Exit a parse tree produced by <see cref="KotlinVarParser.id"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitDeclaration([NotNull] KotlinVarParser.DeclarationContext context);
+	void ExitId([NotNull] KotlinVarParser.IdContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="KotlinVarParser.string_literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterString_literal([NotNull] KotlinVarParser.String_literalContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KotlinVarParser.string_literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitString_literal([NotNull] KotlinVarParser.String_literalContext context);
 }

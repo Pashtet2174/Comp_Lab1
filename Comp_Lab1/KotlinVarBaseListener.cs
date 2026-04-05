@@ -36,29 +36,41 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class KotlinVarBaseListener : IKotlinVarListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KotlinVarParser.program"/>.
+	/// Enter a parse tree produced by <see cref="KotlinVarParser.startRule"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterProgram([NotNull] KotlinVarParser.ProgramContext context) { }
+	public virtual void EnterStartRule([NotNull] KotlinVarParser.StartRuleContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KotlinVarParser.program"/>.
+	/// Exit a parse tree produced by <see cref="KotlinVarParser.startRule"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitProgram([NotNull] KotlinVarParser.ProgramContext context) { }
+	public virtual void ExitStartRule([NotNull] KotlinVarParser.StartRuleContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KotlinVarParser.declaration"/>.
+	/// Enter a parse tree produced by <see cref="KotlinVarParser.id"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterDeclaration([NotNull] KotlinVarParser.DeclarationContext context) { }
+	public virtual void EnterId([NotNull] KotlinVarParser.IdContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KotlinVarParser.declaration"/>.
+	/// Exit a parse tree produced by <see cref="KotlinVarParser.id"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitDeclaration([NotNull] KotlinVarParser.DeclarationContext context) { }
+	public virtual void ExitId([NotNull] KotlinVarParser.IdContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="KotlinVarParser.string_literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterString_literal([NotNull] KotlinVarParser.String_literalContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KotlinVarParser.string_literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitString_literal([NotNull] KotlinVarParser.String_literalContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

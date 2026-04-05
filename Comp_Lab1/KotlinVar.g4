@@ -1,15 +1,22 @@
-grammar KotlinVar;
+grammar KotlinVar;  
 
+startRule : CONST_KW VAL_KW id EQUAL string_literal SEMI EOF ;
 
-// --- Правила парсера ---
-program : declaration* EOF;
-declaration : CONST VAL IDENTIFIER ASSIGN STRING SEMICOLON ;
+id : ID ;
+string_literal : STRING ;
 
-// --- Правила лексера ---
-CONST      : 'const';
-VAL        : 'val';
-IDENTIFIER : [a-zA-Z_] [a-zA-Z0-9_]*;
-STRING     : '"' .*? '"';
-ASSIGN     : '=';
-SEMICOLON  : ';';
-WS         : [ \t\r\n]+ -> skip;
+CONST_KW : 'const' ;
+VAL_KW   : 'val' ;
+EQUAL    : '=' ;
+SEMI     : ';' ;
+
+ID : LETTER (LETTER | DIGIT | '_')* ;
+
+STRING : '"' SYMBOL* '"' ;
+
+fragment LETTER : [a-zA-Z] ;
+fragment DIGIT  : [0-9] ;
+
+fragment SYMBOL : [a-zA-Z0-9+\-/*{}();_] ;
+
+WS : [ \t\r\n]+ -> channel(HIDDEN) ;

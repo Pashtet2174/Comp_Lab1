@@ -429,7 +429,7 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ОШИБКА: незакрытая строка.
+        ///   Looks up a localized string similar to незакрытая строка.
         /// </summary>
         internal static string TypeErrorString {
             get {
@@ -438,7 +438,7 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ОШИБКА: недопустимый символ.
+        ///   Looks up a localized string similar to недопустимый символ.
         /// </summary>
         internal static string TypeErrorSymbol {
             get {
