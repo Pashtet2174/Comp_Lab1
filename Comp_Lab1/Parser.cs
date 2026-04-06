@@ -41,9 +41,19 @@
                     {
                         Errors.Add(new ParserError { 
                             Token = _tokens[i], 
-                            Message = $"Лексическая ошибка: {_tokens[i].Value}" 
+                            Message = $"Лексическая ошибка: {_tokens[i].TypeName} {_tokens[i].Value}" 
                         });
                         i++;
+                    }
+                    if (i >= _tokens.Count) break;
+                    if (_tokens[i].Code != (int)TokenType.KeywordConst && _tokens[i].Code != (int)TokenType.KeywordVal)
+                    {
+                        Errors.Add(new ParserError {
+                            Token = _tokens[i],
+                            Message = "Пропущен обязательный элемент: 'const'"
+                        });
+                        i++;      // Просто переходим к следующему символу
+                        continue; // Идем на новую итерацию внешнего цикла, не заходя в разбор цепочки
                     }
 
                     if (i >= _tokens.Count) break;
@@ -123,7 +133,7 @@
                     }
                 }
             }
-
+        
             private string GetTokenName(TokenType type)
             {
                 switch (type)
