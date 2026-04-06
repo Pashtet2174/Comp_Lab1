@@ -13,8 +13,7 @@
         {
             private readonly List<Token> _tokens;
             public List<ParserError> Errors { get; } = new List<ParserError>();
-
-            // Ожидаемая последовательность для одного выражения
+            
             private readonly TokenType[] _expectedSequence = 
             {
                 TokenType.KeywordConst,
@@ -52,8 +51,8 @@
                             Token = _tokens[i],
                             Message = "Пропущен обязательный элемент: 'const'"
                         });
-                        i++;      // Просто переходим к следующему символу
-                        continue; // Идем на новую итерацию внешнего цикла, не заходя в разбор цепочки
+                        i++;      
+                        continue; 
                     }
 
                     if (i >= _tokens.Count) break;

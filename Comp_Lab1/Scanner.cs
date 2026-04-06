@@ -55,15 +55,14 @@ namespace Comp_Lab1
                         lineStartPos = i + 1; 
                     }
                     i++;
-                    continue; // Токен не добавляем, просто идем дальше
+                    continue; 
                 }
 
                 if (c == '"')
                 {
                     int start = i;
                     i++; 
-    
-                    // Добавлена проверка на \n, чтобы ошибка не съела весь остаток кода
+                    
                     while (i < _source.Length && _source[i] != '"' && _source[i] != '\n') 
                     {
                         i++;
@@ -71,14 +70,12 @@ namespace Comp_Lab1
 
                     if (i < _source.Length && _source[i] == '"')
                     {
-                        i++; // Закрывающая кавычка
+                        i++;
                         string val = _source.Substring(start, i - start);
-                        // Исправлен EndPos: теперь это i - lineStartPos
                         tokens.Add(CreateToken(TokenType.StringConstant, Label.TypeString, val, currentLine, startInLine, i - lineStartPos));
                     }
                     else
                     {
-                        // Ошибка: строка не закрыта до конца физической строки
                         tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorString, _source.Substring(start, i - start), currentLine, startInLine, i - lineStartPos));
                     }
                     continue;

@@ -119,7 +119,7 @@ public partial class Form1 : Form
             }
         }
     }
-
+    //antlr
    /*private void RunParser(object sender = null, EventArgs e = null)
     {
         if (tabControlEditor.TabCount == 0 || tabControlEditor.SelectedTab == null)
