@@ -58,7 +58,7 @@
                     if (i >= _tokens.Count) break;
                     int state = 0;
                     bool wasStarted = false; 
-
+                    
                     while (state < _expectedSequence.Length && i < _tokens.Count)
                     {
                         var currentToken = _tokens[i];
@@ -69,7 +69,12 @@
                                 Token = currentToken, 
                                 Message = $"Лексическая ошибка: {currentToken.TypeName} '{currentToken.Value}'" 
                             });
-                            state++;
+
+                            if (currentToken.Value.StartsWith("\"") && _expectedSequence[state] == TokenType.StringConstant)
+                            {
+                                state++;
+                            }
+
                             i++;
                             wasStarted = true;
                             continue;
@@ -100,10 +105,21 @@
                             {
                                 for (int k = i; k < lookaheadIndex; k++)
                                 {
-                                    Errors.Add(new ParserError {
-                                        Token = _tokens[k],
-                                        Message = $"Лишний элемент '{_tokens[k].Value}' перед '{GetTokenName(_expectedSequence[state])}'"
-                                    });
+                                    // ПРОВЕРКА: если среди "лишних" токенов затесалась лексическая ошибка
+                                    if (_tokens[k].Code == (int)TokenType.Error)
+                                    {
+                                        Errors.Add(new ParserError {
+                                            Token = _tokens[k],
+                                            Message = $"Лексическая ошибка: {_tokens[k].TypeName} '{_tokens[k].Value}'"
+                                        });
+                                    }
+                                    else
+                                    {
+                                        Errors.Add(new ParserError {
+                                            Token = _tokens[k],
+                                            Message = $"Лишний элемент '{_tokens[k].Value}' перед '{GetTokenName(_expectedSequence[state])}'"
+                                        });
+                                    }
                                 }
                                 i = lookaheadIndex; 
                             }

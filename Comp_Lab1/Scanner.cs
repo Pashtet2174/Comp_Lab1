@@ -105,8 +105,24 @@ namespace Comp_Lab1
                     i++; continue;
                 }
 
-                tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorSymbol, c.ToString(), currentLine, startInLine, startInLine));
-                i++;
+                int startError = i;
+                while (i < _source.Length)
+                {
+                    char errChar = _source[i];
+                    if (char.IsWhiteSpace(errChar) || 
+                        errChar == '"' || 
+                        char.IsLetter(errChar) || 
+                        errChar == '_' || 
+                        errChar == '=' || 
+                        errChar == ';')
+                    {
+                        break; 
+                    }
+                    i++;
+                }
+
+                string errVal = _source.Substring(startError, i - startError);
+                tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorSymbol, errVal, currentLine, startInLine, i - lineStartPos));
             }
             return tokens;
         }
