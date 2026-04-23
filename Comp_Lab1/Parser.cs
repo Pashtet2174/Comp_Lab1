@@ -47,12 +47,48 @@
                     if (i >= _tokens.Count) break;
                     if (_tokens[i].Code != (int)TokenType.KeywordConst && _tokens[i].Code != (int)TokenType.KeywordVal)
                     {
-                        Errors.Add(new ParserError {
-                            Token = _tokens[i],
-                            Message = "Пропущен обязательный элемент: 'const'"
-                        });
-                        i++;      
-                        continue; 
+                        // 1. Смотрим вперед: есть ли надежда найти 'const' или 'val' до конца инструкции?
+                        bool foundKeywordAhead = false;
+                        int scanIndex = i;
+                        while (scanIndex < _tokens.Count && _tokens[scanIndex].Code != (int)TokenType.Semicolon)
+                        {
+                            if (_tokens[scanIndex].Code == (int)TokenType.KeywordConst || 
+                                _tokens[scanIndex].Code == (int)TokenType.KeywordVal)
+                            {
+                                foundKeywordAhead = true;
+                                break;
+                            }
+                            scanIndex++;
+                        }
+
+                        // 2. Если дальше есть 'const' или 'val', мы ничего здесь не делаем!
+                        // Пускаем код в твой основной цикл (while state < _expectedSequence.Length).
+                        // Он сам напишет "Пропущен const", выведет лишние токены (con, st) и найдет лексическую ошибку (##).
+    
+                        if (!foundKeywordAhead)
+                        {
+                            // 3. А вот если надежды нет (например, ввели просто "c;"), 
+                            // выдаем ОДНУ ошибку, чтобы не было лавины.
+                            Errors.Add(new ParserError {
+                                Token = _tokens[i],
+                                Message = $"Ожидалось ключевое слово."
+                            });
+
+                            // 4. Пропускаем мусор до ';', НО не забываем проверять лексические ошибки внутри мусора!
+                            while (i < _tokens.Count && _tokens[i].Code != (int)TokenType.Semicolon)
+                            {
+                                if (_tokens[i].Code == (int)TokenType.Error) 
+                                {
+                                    Errors.Add(new ParserError { 
+                                        Token = _tokens[i], 
+                                        Message = $"Лексическая ошибка: {_tokens[i].TypeName} '{_tokens[i].Value}'" 
+                                    });
+                                }
+                                i++;
+                            }
+                            if (i < _tokens.Count) i++; // Пропускаем саму ';'
+                            continue; 
+                        }
                     }
 
                     if (i >= _tokens.Count) break;
