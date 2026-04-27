@@ -14,6 +14,7 @@ namespace Comp_Lab1
         Semicolon = 16,    // ;
         Error = 99         // ошибка
     }
+
     public class Token
     {
         public int Code { get; set; }
@@ -23,6 +24,7 @@ namespace Comp_Lab1
         public int StartPos { get; set; }
         public int EndPos { get; set; }
     }
+
     public class Scanner
     {
         private readonly string _source;
@@ -31,10 +33,12 @@ namespace Comp_Lab1
             { "const", TokenType.KeywordConst }, 
             { "val", TokenType.KeywordVal } 
         };
+
         public Scanner(string source)
         {
             _source = source;
         } 
+
         public List<Token> Analyze()
         {
             var tokens = new List<Token>();
@@ -81,50 +85,62 @@ namespace Comp_Lab1
                     continue;
                 }
 
-                if (char.IsLetter(c) || c == '_')
-                {
-                    int start = i;
-                    while (i < _source.Length && (char.IsLetterOrDigit(_source[i]) || _source[i] == '_')) i++;
-                    string val = _source.Substring(start, i - start);
-                    
-                    if (_keywords.TryGetValue(val, out TokenType keywordType))
-                        tokens.Add(CreateToken(keywordType, Label.TypeKeyword, val, currentLine, startInLine, i - lineStartPos));
-                    else
-                        tokens.Add(CreateToken(TokenType.Identifier, Label.TypeIdentifier, val, currentLine, startInLine, i - lineStartPos));
-                    continue;
-                }
-
                 if (c == '=')
                 {
                     tokens.Add(CreateToken(TokenType.Assignment, Label.TypeAssign, "=", currentLine, startInLine, startInLine));
-                    i++; continue;
+                    i++; 
+                    continue;
                 }
                 if (c == ';')
                 {
                     tokens.Add(CreateToken(TokenType.Semicolon, Label.TypeSemicolon, ";", currentLine, startInLine, startInLine));
-                    i++; continue;
+                    i++; 
+                    continue;
                 }
 
-                int startError = i;
+                int wordStart = i;
                 while (i < _source.Length)
                 {
-                    char errChar = _source[i];
-                    if (char.IsWhiteSpace(errChar) || 
-                        errChar == '"' || 
-                        char.IsLetter(errChar) || 
-                        errChar == '_' || 
-                        errChar == '=' || 
-                        errChar == ';')
+                    char ch = _source[i];
+                    if (char.IsWhiteSpace(ch) || ch == '"' || ch == '=' || ch == ';')
                     {
-                        break; 
+                        break;
                     }
                     i++;
                 }
 
-                string errVal = _source.Substring(startError, i - startError);
-                tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorSymbol, errVal, currentLine, startInLine, i - lineStartPos));
+                string word = _source.Substring(wordStart, i - wordStart);
+
+                if (IsValidIdentifier(word))
+                {
+                    if (_keywords.TryGetValue(word, out TokenType keywordType))
+                    {
+                        tokens.Add(CreateToken(keywordType, Label.TypeKeyword, word, currentLine, startInLine, i - lineStartPos));
+                    }
+                    else
+                    {
+                        tokens.Add(CreateToken(TokenType.Identifier, Label.TypeIdentifier, word, currentLine, startInLine, i - lineStartPos));
+                    }
+                }
+                else
+                {
+                    tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorSymbol, word, currentLine, startInLine, i - lineStartPos));
+                }
             }
             return tokens;
+        }
+
+        private bool IsValidIdentifier(string word)
+        {
+            if (string.IsNullOrEmpty(word)) return false;
+
+            if (!char.IsLetter(word[0]) && word[0] != '_') return false;
+            for (int k = 1; k < word.Length; k++)
+            {
+                if (!char.IsLetterOrDigit(word[k]) && word[k] != '_') return false;
+            }
+
+            return true;
         }
 
         private Token CreateToken(TokenType type, string name, string val, int line, int start, int end)

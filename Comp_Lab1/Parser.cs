@@ -110,7 +110,6 @@
                             {
                                 state++;
                             }
-
                             i++;
                             wasStarted = true;
                             continue;
