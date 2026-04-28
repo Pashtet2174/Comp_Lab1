@@ -60,6 +60,64 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text Editor / Language Processor
+        ///Version 1.0
+        ///Developer: Pavel Obelenets.
+        /// </summary>
+        internal static string AboutMsg {
+            get {
+                return ResourceManager.GetString("AboutMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Editor / Language Processor
+        ///Version 1.0
+        ///Developer: Pavel Ovelenets.
+        /// </summary>
+        internal static string AboutText {
+            get {
+                return ResourceManager.GetString("AboutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total error count: {0}.
+        /// </summary>
+        internal static string AnalysisErrorCount {
+            get {
+                return ResourceManager.GetString("AnalysisErrorCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Syntax analysis: No errors found..
+        /// </summary>
+        internal static string AnalysisNoErrors {
+            get {
+                return ResourceManager.GetString("AnalysisNoErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis completed successfully. No errors found!.
+        /// </summary>
+        internal static string AnalysisSuccess {
+            get {
+                return ResourceManager.GetString("AnalysisSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compiler.
         /// </summary>
         internal static string AppTitle {
@@ -128,6 +186,224 @@ namespace Comp_Lab1 {
         internal static string colType {
             get {
                 return ResourceManager.GetString("colType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: empty text..
+        /// </summary>
+        internal static string ErrEmptyInput {
+            get {
+                return ResourceManager.GetString("ErrEmptyInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter code for analysis..
+        /// </summary>
+        internal static string ErrEmptyMsg {
+            get {
+                return ResourceManager.GetString("ErrEmptyMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: empty text..
+        /// </summary>
+        internal static string ErrEmptyStatus {
+            get {
+                return ResourceManager.GetString("ErrEmptyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty input.
+        /// </summary>
+        internal static string ErrEmptyTitle {
+            get {
+                return ResourceManager.GetString("ErrEmptyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keyword expected..
+        /// </summary>
+        internal static string ErrExpectedKeyword {
+            get {
+                return ResourceManager.GetString("ErrExpectedKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra element &apos;{0}&apos; before &apos;{1}&apos;.
+        /// </summary>
+        internal static string ErrExtraElement {
+            get {
+                return ResourceManager.GetString("ErrExtraElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File not found!
+        ///Check if it is copied to: {0}.
+        /// </summary>
+        internal static string ErrFileNotFound {
+            get {
+                return ResourceManager.GetString("ErrFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: .
+        /// </summary>
+        internal static string ErrFileRead {
+            get {
+                return ResourceManager.GetString("ErrFileRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lexical error: {0} &apos;{1}&apos;.
+        /// </summary>
+        internal static string ErrLexical {
+            get {
+                return ResourceManager.GetString("ErrLexical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing required element: &apos;{0}&apos;.
+        /// </summary>
+        internal static string ErrMissingElement {
+            get {
+                return ResourceManager.GetString("ErrMissingElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: no open tabs..
+        /// </summary>
+        internal static string ErrNoTabs {
+            get {
+                return ResourceManager.GetString("ErrNoTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please create or open a file for analysis first..
+        /// </summary>
+        internal static string ErrNoTabsMsg {
+            get {
+                return ResourceManager.GetString("ErrNoTabsMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: no open tabs..
+        /// </summary>
+        internal static string ErrNoTabsStatus {
+            get {
+                return ResourceManager.GetString("ErrNoTabsStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tab not found.
+        /// </summary>
+        internal static string ErrNoTabsTitle {
+            get {
+                return ResourceManager.GetString("ErrNoTabsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not open page: {0}.
+        /// </summary>
+        internal static string ErrOpenPage {
+            get {
+                return ResourceManager.GetString("ErrOpenPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to open page: .
+        /// </summary>
+        internal static string ErrOpenPage1 {
+            get {
+                return ResourceManager.GetString("ErrOpenPage1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to line {0}, pos {1}.
+        /// </summary>
+        internal static string ErrorLocationFormat {
+            get {
+                return ResourceManager.GetString("ErrorLocationFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: .
+        /// </summary>
+        internal static string ErrPrefix {
+            get {
+                return ResourceManager.GetString("ErrPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected end of file. Missing: &apos;{0}&apos;.
+        /// </summary>
+        internal static string ErrUnexpectedEOF {
+            get {
+                return ResourceManager.GetString("ErrUnexpectedEOF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save changes to file {0}?.
+        /// </summary>
+        internal static string ExitConfirm {
+            get {
+                return ResourceManager.GetString("ExitConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string ExitTitle {
+            get {
+                return ResourceManager.GetString("ExitTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File not found!
+        ///Check path: {0}.
+        /// </summary>
+        internal static string FileNotFoundMsg {
+            get {
+                return ResourceManager.GetString("FileNotFoundMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File saved successfully..
+        /// </summary>
+        internal static string FileSaved {
+            get {
+                return ResourceManager.GetString("FileSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to line {0}, pos {1}.
+        /// </summary>
+        internal static string GridLocation {
+            get {
+                return ResourceManager.GetString("GridLocation", resourceCulture);
             }
         }
         
@@ -393,11 +669,29 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter code for analysis..
+        /// </summary>
+        internal static string MsgEnterCode {
+            get {
+                return ResourceManager.GetString("MsgEnterCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to line.
         /// </summary>
         internal static string MsgLine {
             get {
                 return ResourceManager.GetString("MsgLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please create or open a file for analysis first..
+        /// </summary>
+        internal static string MsgOpenFirst {
+            get {
+                return ResourceManager.GetString("MsgOpenFirst", resourceCulture);
             }
         }
         
@@ -411,11 +705,110 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total errors: {0}.
+        /// </summary>
+        internal static string ParserErrorCount {
+            get {
+                return ResourceManager.GetString("ParserErrorCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis Result.
+        /// </summary>
+        internal static string ParserResultTitle {
+            get {
+                return ResourceManager.GetString("ParserResultTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis completed successfully. No errors detected!.
+        /// </summary>
+        internal static string ParserSuccessMsg {
+            get {
+                return ResourceManager.GetString("ParserSuccessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parsing: No errors found..
+        /// </summary>
+        internal static string ParserSuccessStatus {
+            get {
+                return ResourceManager.GetString("ParserSuccessStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save changes to file {0}?.
+        /// </summary>
+        internal static string SaveConfirmMsg {
+            get {
+                return ResourceManager.GetString("SaveConfirmMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line: {0} | Total lines: {1}.
+        /// </summary>
+        internal static string StatusLineFormat {
+            get {
+                return ResourceManager.GetString("StatusLineFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line: {0} | Total lines: {1}.
+        /// </summary>
+        internal static string StatusLines {
+            get {
+                return ResourceManager.GetString("StatusLines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         internal static string StatusReady {
             get {
                 return ResourceManager.GetString("StatusReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis Result.
+        /// </summary>
+        internal static string TitleAnalysisResult {
+            get {
+                return ResourceManager.GetString("TitleAnalysisResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty input.
+        /// </summary>
+        internal static string TitleEmptyInput {
+            get {
+                return ResourceManager.GetString("TitleEmptyInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string TitleError {
+            get {
+                return ResourceManager.GetString("TitleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tab not found.
+        /// </summary>
+        internal static string TitleTabNotFound {
+            get {
+                return ResourceManager.GetString("TitleTabNotFound", resourceCulture);
             }
         }
         

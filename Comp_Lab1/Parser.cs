@@ -40,7 +40,7 @@
                     {
                         Errors.Add(new ParserError { 
                             Token = _tokens[i], 
-                            Message = $"Лексическая ошибка: {_tokens[i].TypeName} {_tokens[i].Value}" 
+                            Message = string.Format(Label.ErrLexical, _tokens[i].TypeName, _tokens[i].Value)
                         });
                         i++;
                     }
@@ -60,33 +60,26 @@
                             }
                             scanIndex++;
                         }
-
-                        // 2. Если дальше есть 'const' или 'val', мы ничего здесь не делаем!
-                        // Пускаем код в твой основной цикл (while state < _expectedSequence.Length).
-                        // Он сам напишет "Пропущен const", выведет лишние токены (con, st) и найдет лексическую ошибку (##).
-    
+                        
                         if (!foundKeywordAhead)
                         {
-                            // 3. А вот если надежды нет (например, ввели просто "c;"), 
-                            // выдаем ОДНУ ошибку, чтобы не было лавины.
                             Errors.Add(new ParserError {
                                 Token = _tokens[i],
-                                Message = $"Ожидалось ключевое слово."
+                                Message = Label.ErrExpectedKeyword
                             });
-
-                            // 4. Пропускаем мусор до ';', НО не забываем проверять лексические ошибки внутри мусора!
+                            
                             while (i < _tokens.Count && _tokens[i].Code != (int)TokenType.Semicolon)
                             {
                                 if (_tokens[i].Code == (int)TokenType.Error) 
                                 {
                                     Errors.Add(new ParserError { 
                                         Token = _tokens[i], 
-                                        Message = $"Лексическая ошибка: {_tokens[i].TypeName} '{_tokens[i].Value}'" 
+                                        Message = string.Format(Label.ErrLexical, _tokens[i].TypeName, _tokens[i].Value) 
                                     });
                                 }
                                 i++;
                             }
-                            if (i < _tokens.Count) i++; // Пропускаем саму ';'
+                            if (i < _tokens.Count) i++; 
                             continue; 
                         }
                     }
@@ -103,7 +96,7 @@
                         {
                             Errors.Add(new ParserError { 
                                 Token = currentToken, 
-                                Message = $"Лексическая ошибка: {currentToken.TypeName} '{currentToken.Value}'" 
+                                Message = string.Format(Label.ErrLexical, currentToken.TypeName, currentToken.Value) 
                             });
 
                             if (currentToken.Value.StartsWith("\"") && _expectedSequence[state] == TokenType.StringConstant)
@@ -140,19 +133,18 @@
                             {
                                 for (int k = i; k < lookaheadIndex; k++)
                                 {
-                                    // ПРОВЕРКА: если среди "лишних" токенов затесалась лексическая ошибка
                                     if (_tokens[k].Code == (int)TokenType.Error)
                                     {
                                         Errors.Add(new ParserError {
                                             Token = _tokens[k],
-                                            Message = $"Лексическая ошибка: {_tokens[k].TypeName} '{_tokens[k].Value}'"
+                                            Message = string.Format(Label.ErrLexical, _tokens[k].TypeName, _tokens[k].Value)
                                         });
                                     }
                                     else
                                     {
                                         Errors.Add(new ParserError {
                                             Token = _tokens[k],
-                                            Message = $"Лишний элемент '{_tokens[k].Value}' перед '{GetTokenName(_expectedSequence[state])}'"
+                                            Message = string.Format(Label.ErrExtraElement, _tokens[k].Value, GetTokenName(_expectedSequence[state]))
                                         });
                                     }
                                 }
@@ -162,7 +154,7 @@
                             {
                                 Errors.Add(new ParserError {
                                     Token = currentToken,
-                                    Message = $"Пропущен обязательный элемент: '{GetTokenName(_expectedSequence[state])}'"
+                                    Message = string.Format(Label.ErrMissingElement, GetTokenName(_expectedSequence[state]))
                                 });
                                 
                                 state++; 
@@ -177,22 +169,21 @@
                         Errors.Add(new ParserError 
                         {
                             Token = lastToken,
-                            Message = $"Неожиданный конец кода. Не хватает: '{GetTokenName(_expectedSequence[state])}'"
+                            Message = string.Format(Label.ErrUnexpectedEOF, GetTokenName(_expectedSequence[state]))
                         });
                         state++;
                     }
                 }
             }
-        
             private string GetTokenName(TokenType type)
             {
                 switch (type)
                 {
                     case TokenType.KeywordConst: return "const";
                     case TokenType.KeywordVal: return "val";
-                    case TokenType.Identifier: return "идентификатор";
+                    case TokenType.Identifier: return Label.TypeIdentifier;
                     case TokenType.Assignment: return "=";
-                    case TokenType.StringConstant: return "строковая константа ";
+                    case TokenType.StringConstant: return Label.TypeString;
                     case TokenType.Semicolon: return ";";
                     default: return type.ToString();
                 }

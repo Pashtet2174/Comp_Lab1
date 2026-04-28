@@ -56,17 +56,17 @@ public partial class Form1 : Form
                 string content = System.IO.File.ReadAllText(filePath);
                 CreateNewTab(filePath, content);
             }
-            catch (Exception ex) { MessageBox.Show("Ошибка: " + ex.Message); }
+            catch (Exception ex) { MessageBox.Show(Label.ErrPrefix + ex.Message); }
         }
     }
     private void CreateFile(object sender = null, EventArgs e = null)
     {
-        CreateNewTab("Новый файл");
+        CreateNewTab(Label.NewFile);
     }
 
     private void OpenFile(object sender = null, EventArgs e = null)
     {
-        OpenFileDialog ofd = new OpenFileDialog { Filter = "Text Files|*.txt|All Files|*.*" };
+        OpenFileDialog ofd = new OpenFileDialog { Filter = "Text Files|*.txt|All Files|*.*",InitialDirectory = Application.StartupPath };
         if (ofd.ShowDialog() == DialogResult.OK)
         {
             string content = System.IO.File.ReadAllText(ofd.FileName);
@@ -78,19 +78,19 @@ public partial class Form1 : Form
 
         string path = tabControlEditor.SelectedTab.Tag as string;
 
-        if (string.IsNullOrEmpty(path) || path == "Новый файл") {
+        if (string.IsNullOrEmpty(path) || path == Label.NewFile) {
             SaveFileAs(); 
         } else {
             System.IO.File.WriteAllText(path, CurrentEditor.Text);
             CurrentEditor.IsChanged = false;
             tabControlEditor.SelectedTab.Text = System.IO.Path.GetFileName(path);
-            lblStatus.Text = "Файл успешно сохранен.";
+            lblStatus.Text = Label.FileSaved;
         }
     }
     private void SaveFileAs(object sender = null, EventArgs e = null) {
         if (tabControlEditor.SelectedTab == null) return;
 
-        SaveFileDialog sfd = new SaveFileDialog { Filter = "Text Files|*.txt|All Files|*.*" };
+        SaveFileDialog sfd = new SaveFileDialog { Filter = "Text Files|*.txt|All Files|*.*" , InitialDirectory = Application.StartupPath};
         if (sfd.ShowDialog() == DialogResult.OK) {
             tabControlEditor.SelectedTab.Tag = sfd.FileName;
             tabControlEditor.SelectedTab.Text = System.IO.Path.GetFileName(sfd.FileName);
@@ -111,7 +111,7 @@ public partial class Form1 : Form
             if (fctb != null && fctb.IsChanged)
             {
                 tabControlEditor.SelectedTab = tab; 
-                var result = MessageBox.Show($"Сохранить изменения в файле {tab.Text}?", "Выход", 
+                var result = MessageBox.Show(string.Format(Label.SaveConfirmMsg, tab.Text), Label.ExitTitle, 
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes) SaveFile();
@@ -123,33 +123,33 @@ public partial class Form1 : Form
     {
         if (tabControlEditor.TabCount == 0 || tabControlEditor.SelectedTab == null)
         {
-            lblStatus.Text = "Ошибка: нет открытых вкладок.";
+            lblStatus.Text = Label.ErrNoTabsStatus;
             lblStatus.ForeColor = Color.OrangeRed;
         
-            MessageBox.Show("Сначала создайте или откройте файл для анализа.", 
-                "Вкладка не найдена", 
+            MessageBox.Show(Label.ErrNoTabsMsg, 
+                Label.ErrNoTabsTitle, 
                 MessageBoxButtons.OK, 
                 MessageBoxIcon.Warning);
             return;
         }
         if (string.IsNullOrWhiteSpace(CurrentEditor.Text))
         {
-            lblStatus.Text = "Ошибка: пустой текст.";
+            lblStatus.Text = Label.ErrEmptyStatus;
             lblStatus.ForeColor = Color.OrangeRed;
 
-            MessageBox.Show("Пожалуйста, введите код для анализа.", 
-                "Пустой ввод", 
+            MessageBox.Show(Label.ErrEmptyMsg, 
+                Label.ErrEmptyTitle, 
                 MessageBoxButtons.OK, 
                 MessageBoxIcon.Warning);
             return;
         }
         if (string.IsNullOrWhiteSpace(CurrentEditor.Text))
         {
-            lblStatus.Text = "Ошибка: введите текст для анализа.";
+            lblStatus.Text = Label.ErrEmptyStatus;
             lblStatus.ForeColor = Color.OrangeRed;
         
-            MessageBox.Show("Пожалуйста, сначала введите исходный код в редактор.", 
-                "Пустой ввод", 
+            MessageBox.Show(Label.ErrEmptyMsg, 
+                Label.ErrEmptyTitle, 
                 MessageBoxButtons.OK, 
                 MessageBoxIcon.Warning);
         
@@ -172,22 +172,22 @@ public partial class Form1 : Form
 
         if (totalErrors == 0)
         {
-            lblStatus.Text = "Синтаксический анализ: Ошибок нет.";
+            lblStatus.Text = Label.ParserSuccessStatus;
             lblStatus.ForeColor = Color.Green;
-            MessageBox.Show("Анализ завершен успешно. Ошибок не обнаружено!", 
-                "Результат анализа", 
+            MessageBox.Show(Label.ParserSuccessMsg, 
+                Label.ParserResultTitle, 
                 MessageBoxButtons.OK, 
                 MessageBoxIcon.Information);
         }
         else
         {
-            lblStatus.Text = $"Общее количество ошибок: {totalErrors}";
+            lblStatus.Text = string.Format(Label.ParserErrorCount, totalErrors);
             lblStatus.ForeColor = Color.Red; 
         }
     }
     private void AddErrorToGrid( string typeName, string value, Token token)
     {
-        string location = $"строка {token.Line}, поз. {token.StartPos}";
+        string location = string.Format(Label.ErrorLocationFormat, token.Line, token.StartPos);
         int rowIndex = dgvErrors.Rows.Add( value, location, typeName);
         dgvErrors.Rows[rowIndex].Tag = token;
 
@@ -195,7 +195,7 @@ public partial class Form1 : Form
         dgvErrors.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Black;
     }
     private void ShowAbout(object sender, EventArgs e) {
-        MessageBox.Show("Текстовый редактор / Языковой процессор\nВерсия 1.0\nРазработчик: Обеленец Павел", "О программе");
+        MessageBox.Show(Label.AboutMsg, Label.MenuAbout);
     }
     
     private void Help_Click(object sender, EventArgs e) => OpenHtml("help.html");
@@ -225,13 +225,13 @@ public partial class Form1 : Form
             {
                 // Если файла нет, выскочит окно с путем. 
                 // Вы сможете открыть этот путь в проводнике и проверить, есть ли там файл.
-                MessageBox.Show($"Файл не найден!\nПроверьте, что он скопирован в: {path}", 
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format(Label.FileNotFoundMsg, path), 
+                    Label.ErrPrefix.TrimEnd(':', ' '), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Не удалось открыть страницу: {ex.Message}");
+            MessageBox.Show(Label.ErrOpenPage + ex.Message);
         }
     }
     private void Undo_Click(object sender, EventArgs e) {
@@ -261,15 +261,12 @@ public partial class Form1 : Form
     private void SelectAll_Click(object sender, EventArgs e) {
         CurrentEditor.SelectAll();
     }
-    private void Placeholder_Click(object sender, EventArgs e)
+    private FastColoredTextBox CreateNewTab(string fileName = "", string content = "")
     {
-        MessageBox.Show($"Функционал для  еще не реализован.", "Заглушка");
-    }
+        string displayName = string.IsNullOrEmpty(fileName) ? Label.NewFile : System.IO.Path.GetFileName(fileName);
+        TabPage newTabPage = new TabPage(displayName);
     
-    private FastColoredTextBox CreateNewTab(string fileName = "Новый файл", string content = "")
-    {
-        TabPage newTabPage = new TabPage(System.IO.Path.GetFileName(fileName));
-        newTabPage.Tag = (fileName == "Новый файл") ? "" : fileName;
+        newTabPage.Tag = (string.IsNullOrEmpty(fileName) || fileName == Label.NewFile) ? "" : fileName;
         FastColoredTextBox fctb = new FastColoredTextBox();
         fctb.Dock = DockStyle.Fill;
         fctb.Language = FastColoredTextBoxNS.Language.Custom;
@@ -371,7 +368,7 @@ public partial class Form1 : Form
         fctb.IsChanged = false;
         fctb.SelectionChanged += (s, ev) => {
             int line = fctb.Selection.Start.iLine + 1;
-            lblStatus.Text = $"Строка: {line}| Всего строк: {fctb.LinesCount}";
+            lblStatus.Text = string.Format(Label.StatusLineFormat, line, fctb.LinesCount);
         };
         fctb.TextChanged += OnTextChanged;
         return fctb;
@@ -488,7 +485,7 @@ public partial class Form1 : Form
 
         foreach (TabPage tab in tabControlEditor.TabPages)
         {
-            if (tab.Tag != null && string.IsNullOrEmpty(tab.Tag.ToString()))
+            if (tab.Tag == null || string.IsNullOrEmpty(tab.Tag.ToString()))
             {
                 tab.Text = Label.NewFile; 
             }

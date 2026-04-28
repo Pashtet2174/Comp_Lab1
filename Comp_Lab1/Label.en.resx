@@ -117,6 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMsg" xml:space="preserve">
+    <value>Text Editor / Language Processor
+Version 1.0
+Developer: Pavel Obelenets</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Text Editor / Language Processor
+Version 1.0
+Developer: Pavel Ovelenets</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="AnalysisErrorCount" xml:space="preserve">
+    <value>Total error count: {0}</value>
+  </data>
+  <data name="AnalysisNoErrors" xml:space="preserve">
+    <value>Syntax analysis: No errors found.</value>
+  </data>
+  <data name="AnalysisSuccess" xml:space="preserve">
+    <value>Analysis completed successfully. No errors found!</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>Compiler</value>
   </data>
@@ -140,6 +162,80 @@
   </data>
   <data name="colType" xml:space="preserve">
     <value>Token Type</value>
+  </data>
+  <data name="ErrEmptyInput" xml:space="preserve">
+    <value>Error: empty text.</value>
+  </data>
+  <data name="ErrEmptyMsg" xml:space="preserve">
+    <value>Please enter code for analysis.</value>
+  </data>
+  <data name="ErrEmptyStatus" xml:space="preserve">
+    <value>Error: empty text.</value>
+  </data>
+  <data name="ErrEmptyTitle" xml:space="preserve">
+    <value>Empty input</value>
+  </data>
+  <data name="ErrExpectedKeyword" xml:space="preserve">
+    <value>Keyword expected.</value>
+  </data>
+  <data name="ErrExtraElement" xml:space="preserve">
+    <value>Extra element '{0}' before '{1}'</value>
+  </data>
+  <data name="ErrFileNotFound" xml:space="preserve">
+    <value>File not found!
+Check if it is copied to: {0}</value>
+  </data>
+  <data name="ErrFileRead" xml:space="preserve">
+    <value>Error: </value>
+  </data>
+  <data name="ErrLexical" xml:space="preserve">
+    <value>Lexical error: {0} '{1}'</value>
+  </data>
+  <data name="ErrMissingElement" xml:space="preserve">
+    <value>Missing required element: '{0}'</value>
+  </data>
+  <data name="ErrNoTabs" xml:space="preserve">
+    <value>Error: no open tabs.</value>
+  </data>
+  <data name="ErrNoTabsMsg" xml:space="preserve">
+    <value>Please create or open a file for analysis first.</value>
+  </data>
+  <data name="ErrNoTabsStatus" xml:space="preserve">
+    <value>Error: no open tabs.</value>
+  </data>
+  <data name="ErrNoTabsTitle" xml:space="preserve">
+    <value>Tab not found</value>
+  </data>
+  <data name="ErrOpenPage" xml:space="preserve">
+    <value>Could not open page: {0}</value>
+  </data>
+  <data name="ErrOpenPage1" xml:space="preserve">
+    <value>Failed to open page: </value>
+  </data>
+  <data name="ErrorLocationFormat" xml:space="preserve">
+    <value>line {0}, pos {1}</value>
+  </data>
+  <data name="ErrPrefix" xml:space="preserve">
+    <value>Error: </value>
+  </data>
+  <data name="ErrUnexpectedEOF" xml:space="preserve">
+    <value>Unexpected end of file. Missing: '{0}'</value>
+  </data>
+  <data name="ExitConfirm" xml:space="preserve">
+    <value>Save changes to file {0}?</value>
+  </data>
+  <data name="ExitTitle" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="FileNotFoundMsg" xml:space="preserve">
+    <value>File not found!
+Check path: {0}</value>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>File saved successfully.</value>
+  </data>
+  <data name="GridLocation" xml:space="preserve">
+    <value>line {0}, pos {1}</value>
   </data>
   <data name="LangEn" xml:space="preserve">
     <value>English</value>
@@ -228,14 +324,53 @@
   <data name="MenuUndo" xml:space="preserve">
     <value>Undo</value>
   </data>
+  <data name="MsgEnterCode" xml:space="preserve">
+    <value>Please enter code for analysis.</value>
+  </data>
   <data name="MsgLine" xml:space="preserve">
     <value>line</value>
+  </data>
+  <data name="MsgOpenFirst" xml:space="preserve">
+    <value>Please create or open a file for analysis first.</value>
   </data>
   <data name="NewFile" xml:space="preserve">
     <value>New file</value>
 </data>
+  <data name="ParserErrorCount" xml:space="preserve">
+    <value>Total errors: {0}</value>
+  </data>
+  <data name="ParserResultTitle" xml:space="preserve">
+    <value>Analysis Result</value>
+  </data>
+  <data name="ParserSuccessMsg" xml:space="preserve">
+    <value>Analysis completed successfully. No errors detected!</value>
+  </data>
+  <data name="ParserSuccessStatus" xml:space="preserve">
+    <value>Parsing: No errors found.</value>
+  </data>
+  <data name="SaveConfirmMsg" xml:space="preserve">
+    <value>Save changes to file {0}?</value>
+  </data>
+  <data name="StatusLineFormat" xml:space="preserve">
+    <value>Line: {0} | Total lines: {1}</value>
+  </data>
+  <data name="StatusLines" xml:space="preserve">
+    <value>Line: {0} | Total lines: {1}</value>
+  </data>
   <data name="StatusReady" xml:space="preserve">
     <value>Ready</value>
+  </data>
+  <data name="TitleAnalysisResult" xml:space="preserve">
+    <value>Analysis Result</value>
+  </data>
+  <data name="TitleEmptyInput" xml:space="preserve">
+    <value>Empty input</value>
+  </data>
+  <data name="TitleError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="TitleTabNotFound" xml:space="preserve">
+    <value>Tab not found</value>
   </data>
   <data name="TypeAssign" xml:space="preserve">
     <value>assignment operator</value>

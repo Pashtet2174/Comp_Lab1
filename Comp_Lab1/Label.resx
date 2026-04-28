@@ -120,6 +120,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMsg" xml:space="preserve">
+    <value>Текстовый редактор / Языковой процессор
+Версия 1.0
+Разработчик: Обеленец Павел</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Текстовый редактор / Языковой процессор
+Версия 1.0
+Разработчик: Обеленец Павел</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="AnalysisErrorCount" xml:space="preserve">
+    <value>Общее количество ошибок: {0}</value>
+  </data>
+  <data name="AnalysisNoErrors" xml:space="preserve">
+    <value>Синтаксический анализ: Ошибок нет.</value>
+  </data>
+  <data name="AnalysisSuccess" xml:space="preserve">
+    <value>Анализ завершен успешно. Ошибок не обнаружено!</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>Компилятор</value>
   </data>
@@ -143,6 +165,80 @@
   </data>
   <data name="colType" xml:space="preserve">
     <value>Тип лексемы</value>
+  </data>
+  <data name="ErrEmptyInput" xml:space="preserve">
+    <value>Ошибка: пустой текст.</value>
+  </data>
+  <data name="ErrEmptyMsg" xml:space="preserve">
+    <value>Пожалуйста, введите код для анализа.</value>
+  </data>
+  <data name="ErrEmptyStatus" xml:space="preserve">
+    <value>Ошибка: пустой текст.</value>
+  </data>
+  <data name="ErrEmptyTitle" xml:space="preserve">
+    <value>Пустой ввод</value>
+  </data>
+  <data name="ErrExpectedKeyword" xml:space="preserve">
+    <value>Ожидалось ключевое слово.</value>
+  </data>
+  <data name="ErrExtraElement" xml:space="preserve">
+    <value>Лишний элемент '{0}' перед '{1}'</value>
+  </data>
+  <data name="ErrFileNotFound" xml:space="preserve">
+    <value>Файл не найден!
+Проверьте, что он скопирован в: {0}</value>
+  </data>
+  <data name="ErrFileRead" xml:space="preserve">
+    <value>Ошибка: </value>
+  </data>
+  <data name="ErrLexical" xml:space="preserve">
+    <value>Лексическая ошибка: {0} '{1}'</value>
+  </data>
+  <data name="ErrMissingElement" xml:space="preserve">
+    <value>Пропущен обязательный элемент: '{0}'</value>
+  </data>
+  <data name="ErrNoTabs" xml:space="preserve">
+    <value>Ошибка: нет открытых вкладок.</value>
+  </data>
+  <data name="ErrNoTabsMsg" xml:space="preserve">
+    <value>Сначала создайте или откройте файл для анализа.</value>
+  </data>
+  <data name="ErrNoTabsStatus" xml:space="preserve">
+    <value>Ошибка: нет открытых вкладок.</value>
+  </data>
+  <data name="ErrNoTabsTitle" xml:space="preserve">
+    <value>Вкладка не найдена</value>
+  </data>
+  <data name="ErrOpenPage" xml:space="preserve">
+    <value>Не удалось открыть страницу: {0}</value>
+  </data>
+  <data name="ErrOpenPage1" xml:space="preserve">
+    <value>Не удалось открыть страницу: </value>
+  </data>
+  <data name="ErrorLocationFormat" xml:space="preserve">
+    <value>строка {0}, поз. {1}</value>
+  </data>
+  <data name="ErrPrefix" xml:space="preserve">
+    <value>Ошибка: </value>
+  </data>
+  <data name="ErrUnexpectedEOF" xml:space="preserve">
+    <value>Неожиданный конец кода. Не хватает: '{0}'</value>
+  </data>
+  <data name="ExitConfirm" xml:space="preserve">
+    <value>Сохранить изменения в файле {0}?</value>
+  </data>
+  <data name="ExitTitle" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="FileNotFoundMsg" xml:space="preserve">
+    <value>Файл не найден!
+Проверьте путь: {0}</value>
+  </data>
+  <data name="FileSaved" xml:space="preserve">
+    <value>Файл успешно сохранен.</value>
+  </data>
+  <data name="GridLocation" xml:space="preserve">
+    <value>строка {0}, поз. {1}</value>
   </data>
   <data name="LangEn" xml:space="preserve">
     <value>Английский</value>
@@ -231,14 +327,53 @@
   <data name="MenuUndo" xml:space="preserve">
     <value>Отменить</value>
   </data>
+  <data name="MsgEnterCode" xml:space="preserve">
+    <value>Пожалуйста, введите код для анализа.</value>
+  </data>
   <data name="MsgLine" xml:space="preserve">
     <value>стр.</value>
+  </data>
+  <data name="MsgOpenFirst" xml:space="preserve">
+    <value>Сначала создайте или откройте файл для анализа.</value>
   </data>
   <data name="NewFile" xml:space="preserve">
     <value>Новый файл</value>
 </data>
+  <data name="ParserErrorCount" xml:space="preserve">
+    <value>Общее количество ошибок: {0}</value>
+  </data>
+  <data name="ParserResultTitle" xml:space="preserve">
+    <value>Результат анализа</value>
+  </data>
+  <data name="ParserSuccessMsg" xml:space="preserve">
+    <value>Анализ завершен успешно. Ошибок не обнаружено!</value>
+  </data>
+  <data name="ParserSuccessStatus" xml:space="preserve">
+    <value>Синтаксический анализ: Ошибок нет.</value>
+  </data>
+  <data name="SaveConfirmMsg" xml:space="preserve">
+    <value>Сохранить изменения в файле {0}?</value>
+  </data>
+  <data name="StatusLineFormat" xml:space="preserve">
+    <value>Строка: {0} | Всего строк: {1}</value>
+  </data>
+  <data name="StatusLines" xml:space="preserve">
+    <value>Строка: {0} | Всего строк: {1}</value>
+  </data>
   <data name="StatusReady" xml:space="preserve">
     <value>Готов</value>
+  </data>
+  <data name="TitleAnalysisResult" xml:space="preserve">
+    <value>Результат анализа</value>
+  </data>
+  <data name="TitleEmptyInput" xml:space="preserve">
+    <value>Пустой ввод</value>
+  </data>
+  <data name="TitleError" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="TitleTabNotFound" xml:space="preserve">
+    <value>Вкладка не найдена</value>
   </data>
   <data name="TypeAssign" xml:space="preserve">
     <value>оператор присваивания</value>
