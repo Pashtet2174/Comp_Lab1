@@ -21,6 +21,22 @@ public partial class Form1 : Form
         EnableDragDropForAll(this);
         ApplyLocalization();
         dgvErrors.CellClick += dgvErrors_CellClick;
+        // В конструктор Form1()
+        ContextMenuStrip tabMenu = new ContextMenuStrip();
+        ToolStripMenuItem closeTabItem = new ToolStripMenuItem("Закрыть вкладку");
+        closeTabItem.Click += CloseTab_Click;
+        tabMenu.Items.Add(closeTabItem);
+        tabControlEditor.ContextMenuStrip = tabMenu;
+        tabControlEditor.MouseDown += (s, e) => {
+            if (e.Button == MouseButtons.Right) {
+                for (int i = 0; i < tabControlEditor.TabCount; i++) {
+                    if (tabControlEditor.GetTabRect(i).Contains(e.Location)) {
+                        tabControlEditor.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        };
     }
     private void EnableDragDropForAll(Control parent)
     {
@@ -526,5 +542,40 @@ public partial class Form1 : Form
         e.ChangedRange.ClearStyle(BlueStyle, BrownStyle);
         e.ChangedRange.SetStyle(BrownStyle, @"""""|@""[^""]*""|""[^""\\]*(?:\\.[^""\\]*)*""");
         e.ChangedRange.SetStyle(BlueStyle, @"\b(const|val)\b");
+    }
+    private void CloseTab_Click(object sender, EventArgs e)
+    {
+        CloseCurrentTab();
+    }
+
+    private void CloseCurrentTab()
+    {
+        if (tabControlEditor.SelectedTab == null) return;
+
+        TabPage currentTab = tabControlEditor.SelectedTab;
+        var fctb = currentTab.Controls[0] as FastColoredTextBox;
+
+        if (fctb != null && fctb.IsChanged)
+        {
+            var result = MessageBox.Show(
+                string.Format(Label.SaveConfirmMsg, currentTab.Text), 
+                Label.ExitTitle, 
+                MessageBoxButtons.YesNoCancel, 
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) 
+            {
+                SaveFile(); 
+                tabControlEditor.TabPages.Remove(currentTab);
+            }
+            else if (result == DialogResult.No) 
+            {
+                tabControlEditor.TabPages.Remove(currentTab);
+            }
+        }
+        else
+        {
+            tabControlEditor.TabPages.Remove(currentTab);
+        }
     }
 }

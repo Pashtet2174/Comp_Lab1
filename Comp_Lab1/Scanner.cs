@@ -134,10 +134,24 @@ namespace Comp_Lab1
         {
             if (string.IsNullOrEmpty(word)) return false;
 
-            if (!char.IsLetter(word[0]) && word[0] != '_') return false;
+            // Проверяем первый символ: только латинская буква (A-Z, a-z)
+            if (!((word[0] >= 'a' && word[0] <= 'z') || (word[0] >= 'A' && word[0] <= 'Z')))
+            {
+                return false;
+            }
+
+            // Проверяем остальные символы
             for (int k = 1; k < word.Length; k++)
             {
-                if (!char.IsLetterOrDigit(word[k]) && word[k] != '_') return false;
+                char ch = word[k];
+                bool isLatin = (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+                bool isDigit = ch >= '0' && ch <= '9';
+                bool isUnderscore = ch == '_';
+
+                if (!isLatin && !isDigit && !isUnderscore)
+                {
+                    return false;
+                }
             }
 
             return true;
