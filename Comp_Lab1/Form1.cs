@@ -210,10 +210,9 @@ public partial class Form1 : Form
     {
         try
         {
-            // Application.StartupPath — это папка bin/Debug/..., где лежит exe
-            // Мы говорим программе заглянуть там в папку "html"
-            string path = System.IO.Path.Combine(Application.StartupPath, "html", fileName);
-
+            string langCode = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+        
+            string path = System.IO.Path.Combine(Application.StartupPath, "html", langCode, fileName);
             if (System.IO.File.Exists(path))
             {
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path)

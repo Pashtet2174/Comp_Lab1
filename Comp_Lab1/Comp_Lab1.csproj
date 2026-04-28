@@ -40,7 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="html\*.html">
+        <None Update="html\**\*.*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
