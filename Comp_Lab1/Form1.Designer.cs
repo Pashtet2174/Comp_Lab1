@@ -222,49 +222,49 @@ partial class Form1
         постановкаЗадачиToolStripMenuItem.Name = "постановкаЗадачиToolStripMenuItem";
         постановкаЗадачиToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         постановкаЗадачиToolStripMenuItem.Text = "Постановка задачи";
-        постановкаЗадачиToolStripMenuItem.Click += Placeholder_Click;
+        постановкаЗадачиToolStripMenuItem.Click += Task_Click;
         // 
         // грамматикаToolStripMenuItem
         // 
         грамматикаToolStripMenuItem.Name = "грамматикаToolStripMenuItem";
         грамматикаToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         грамматикаToolStripMenuItem.Text = "Грамматика";
-        грамматикаToolStripMenuItem.Click += Placeholder_Click;
+        грамматикаToolStripMenuItem.Click += Grammar_Click;
         // 
         // классификацияГрамматикиToolStripMenuItem
         // 
         классификацияГрамматикиToolStripMenuItem.Name = "классификацияГрамматикиToolStripMenuItem";
         классификацияГрамматикиToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         классификацияГрамматикиToolStripMenuItem.Text = "Классификация грамматики";
-        классификацияГрамматикиToolStripMenuItem.Click += Placeholder_Click;
+        классификацияГрамматикиToolStripMenuItem.Click += Classification_Click;
         // 
         // методАнализаToolStripMenuItem
         // 
         методАнализаToolStripMenuItem.Name = "методАнализаToolStripMenuItem";
         методАнализаToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         методАнализаToolStripMenuItem.Text = "Метод анализа";
-        методАнализаToolStripMenuItem.Click += Placeholder_Click;
+        методАнализаToolStripMenuItem.Click += Method_Click;
         // 
         // тестовыйПримерToolStripMenuItem
         // 
         тестовыйПримерToolStripMenuItem.Name = "тестовыйПримерToolStripMenuItem";
         тестовыйПримерToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         тестовыйПримерToolStripMenuItem.Text = "Тестовый пример";
-        тестовыйПримерToolStripMenuItem.Click += Placeholder_Click;
+        тестовыйПримерToolStripMenuItem.Click += Example_Click;
         // 
         // списокЛитературыToolStripMenuItem
         // 
         списокЛитературыToolStripMenuItem.Name = "списокЛитературыToolStripMenuItem";
         списокЛитературыToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         списокЛитературыToolStripMenuItem.Text = "Список литературы";
-        списокЛитературыToolStripMenuItem.Click += Placeholder_Click;
+        списокЛитературыToolStripMenuItem.Click += Literature_Click;
         // 
         // исходныйКодПрограммыToolStripMenuItem
         // 
         исходныйКодПрограммыToolStripMenuItem.Name = "исходныйКодПрограммыToolStripMenuItem";
         исходныйКодПрограммыToolStripMenuItem.Size = new System.Drawing.Size(325, 30);
         исходныйКодПрограммыToolStripMenuItem.Text = "Исходный код программы";
-        исходныйКодПрограммыToolStripMenuItem.Click += Placeholder_Click;
+        исходныйКодПрограммыToolStripMenuItem.Click += SourceCode_Click;
         // 
         // пускToolStripMenuItem
         // 
@@ -288,7 +288,7 @@ partial class Form1
         вызовСправкиToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
         вызовСправкиToolStripMenuItem.Size = new System.Drawing.Size(253, 30);
         вызовСправкиToolStripMenuItem.Text = "Вызов справки";
-        вызовСправкиToolStripMenuItem.Click += ShowHelp;
+        вызовСправкиToolStripMenuItem.Click += Help_Click;
         // 
         // оПрограммеToolStripMenuItem
         // 
@@ -431,7 +431,7 @@ partial class Form1
         toolStripButton11.Name = "toolStripButton11";
         toolStripButton11.Size = new System.Drawing.Size(44, 44);
         toolStripButton11.Text = "Справка";
-        toolStripButton11.Click += ShowHelp;
+        toolStripButton11.Click += Help_Click;
         // 
         // toolStripButton8
         // 

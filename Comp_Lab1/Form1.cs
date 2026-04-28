@@ -118,76 +118,7 @@ public partial class Form1 : Form
                 else if (result == DialogResult.Cancel) { e.Cancel = true; return; }
             }
         }
-    }
-    //antlr
-   /*private void RunParser(object sender = null, EventArgs e = null)
-    {
-        if (tabControlEditor.TabCount == 0 || tabControlEditor.SelectedTab == null)
-        {
-            lblStatus.Text = "Ошибка: нет открытых вкладок.";
-            lblStatus.ForeColor = Color.OrangeRed;
-
-            MessageBox.Show("Сначала создайте или откройте файл для анализа.",
-                "Вкладка не найдена", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-        }
-
-        string sourceCode = CurrentEditor.Text;
-
-        if (string.IsNullOrWhiteSpace(sourceCode))
-        {
-            lblStatus.Text = "Ошибка: пустой текст.";
-            lblStatus.ForeColor = Color.OrangeRed;
-
-            MessageBox.Show("Пожалуйста, введите код для анализа.",
-                "Пустой ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-        }
-        dgvErrors.Rows.Clear();
-
-        var stream = CharStreams.fromString(sourceCode);
-        var lexer = new KotlinVarLexer(stream);
-        var tokens = new CommonTokenStream(lexer);
-        var parser = new KotlinVarParser(tokens);
-
-        lexer.RemoveErrorListeners(); 
-        parser.RemoveErrorListeners();
-
-        var errorListener = new AntlrUIErrorListener();
-        parser.AddErrorListener(errorListener);
-
-        parser.startRule();
-
-        foreach (var err in errorListener.Errors)
-        {
-            AddErrorToGrid("Синтаксическая ошибка: " + err.Message, err.OffendingText, err.Line, err.Column);
-        }
-
-        int totalErrors = errorListener.Errors.Count;
-
-        if (totalErrors == 0)
-        {
-            lblStatus.Text = "Синтаксический анализ: Ошибок нет.";
-            lblStatus.ForeColor = Color.Green;
-            MessageBox.Show("Анализ завершен успешно. Ошибок не обнаружено!",
-                "Результат анализа", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        else
-        {
-            lblStatus.Text = $"Общее количество ошибок: {totalErrors}";
-            lblStatus.ForeColor = Color.Red;
-        }
-    }
-
-    private void AddErrorToGrid(string message, string value, int line, int pos)
-    {
-        string location = $"строка {line}, поз. {pos}";
-        
-        int rowIndex = dgvErrors.Rows.Add(value, location, message);
-
-        dgvErrors.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
-        dgvErrors.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.Black;
-    }*/
+    }   
    private void RunParser(object sender = null, EventArgs e = null) 
     {
         if (tabControlEditor.TabCount == 0 || tabControlEditor.SelectedTab == null)
@@ -266,20 +197,41 @@ public partial class Form1 : Form
     private void ShowAbout(object sender, EventArgs e) {
         MessageBox.Show("Текстовый редактор / Языковой процессор\nВерсия 1.0\nРазработчик: Обеленец Павел", "О программе");
     }
-
-    private void ShowHelp(object sender, EventArgs e) {
-        string helpPath = System.IO.Path.Combine(Application.StartupPath, "help.html");
-
-        if (System.IO.File.Exists(helpPath))
+    
+    private void Help_Click(object sender, EventArgs e) => OpenHtml("help.html");
+    private void Task_Click(object sender, EventArgs e) => OpenHtml("task.html");
+    private void Grammar_Click(object sender, EventArgs e) => OpenHtml("grammar.html");
+    private void Classification_Click(object sender, EventArgs e) => OpenHtml("classification.html");
+    private void Method_Click(object sender, EventArgs e) => OpenHtml("method.html");
+    private void Example_Click(object sender, EventArgs e) => OpenHtml("example.html");
+    private void Literature_Click(object sender, EventArgs e) => OpenHtml("literature.html");
+    private void SourceCode_Click(object sender, EventArgs e) => OpenHtml("code.html");
+    private void OpenHtml(string fileName)
+    {
+        try
         {
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(helpPath) 
-            { 
-                UseShellExecute = true 
-            });
+            // Application.StartupPath — это папка bin/Debug/..., где лежит exe
+            // Мы говорим программе заглянуть там в папку "html"
+            string path = System.IO.Path.Combine(Application.StartupPath, "html", fileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path)
+                {
+                    UseShellExecute = true 
+                });
+            }
+            else
+            {
+                // Если файла нет, выскочит окно с путем. 
+                // Вы сможете открыть этот путь в проводнике и проверить, есть ли там файл.
+                MessageBox.Show($"Файл не найден!\nПроверьте, что он скопирован в: {path}", 
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            MessageBox.Show("Файл справки (help.html) не найден в папке с программой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Не удалось открыть страницу: {ex.Message}");
         }
     }
     private void Undo_Click(object sender, EventArgs e) {
