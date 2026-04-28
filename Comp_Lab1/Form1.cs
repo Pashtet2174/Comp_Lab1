@@ -234,31 +234,38 @@ public partial class Form1 : Form
         }
     }
     private void Undo_Click(object sender, EventArgs e) {
-        if (CurrentEditor.UndoEnabled) CurrentEditor.Undo();
+        if (CurrentEditor != null && CurrentEditor.UndoEnabled) 
+            CurrentEditor.Undo();
     }
 
     private void Redo_Click(object sender, EventArgs e) {
-        if (CurrentEditor.RedoEnabled) CurrentEditor.Redo();
+        if (CurrentEditor != null && CurrentEditor.RedoEnabled) 
+            CurrentEditor.Redo();
     }
 
     private void Cut_Click(object sender, EventArgs e) {
-        CurrentEditor.Cut();
+        if (CurrentEditor != null) 
+            CurrentEditor.Cut();
     }
 
     private void Copy_Click(object sender, EventArgs e) {
-        CurrentEditor.Copy();
+        if (CurrentEditor != null) 
+            CurrentEditor.Copy();
     }
 
     private void Paste_Click(object sender, EventArgs e) {
-        CurrentEditor.Paste();
+        if (CurrentEditor != null) 
+            CurrentEditor.Paste();
     }
 
     private void Delete_Click(object sender, EventArgs e) {
-        CurrentEditor.SelectedText = "";
+        if (CurrentEditor != null) 
+            CurrentEditor.SelectedText = "";
     }
 
     private void SelectAll_Click(object sender, EventArgs e) {
-        CurrentEditor.SelectAll();
+        if (CurrentEditor != null) 
+            CurrentEditor.SelectAll();
     }
     private FastColoredTextBox CreateNewTab(string fileName = "", string content = "")
     {
