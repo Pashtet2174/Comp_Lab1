@@ -36,7 +36,7 @@ namespace Comp_Lab1
             while (i < _tokens.Count)
             {
                 while (i < _tokens.Count && 
-                       _tokens[i].Code == (int)TokenType.Error) 
+                       _tokens[i].Code == (int)TokenType.ErrorOnlyBadChars) 
                 {
                     Errors.Add(new ParserError { 
                         Token = _tokens[i], 
@@ -45,54 +45,33 @@ namespace Comp_Lab1
                     i++;
                 }
                 if (i >= _tokens.Count) break;
-                if (_tokens[i].Code != (int)TokenType.KeywordConst && _tokens[i].Code != (int)TokenType.KeywordVal)
+                if (_tokens[i].Code == (int)TokenType.Semicolon)
                 {
-                    // 1. Смотрим вперед: есть ли надежда найти 'const' или 'val' до конца инструкции?
-                    bool foundKeywordAhead = false;
-                    int scanIndex = i;
-                    while (scanIndex < _tokens.Count && _tokens[scanIndex].Code != (int)TokenType.Semicolon)
+                    Errors.Add(new ParserError
                     {
-                        if (_tokens[scanIndex].Code == (int)TokenType.KeywordConst || 
-                            _tokens[scanIndex].Code == (int)TokenType.KeywordVal)
-                        {
-                            foundKeywordAhead = true;
-                            break;
-                        }
-                        scanIndex++;
-                    }
-                    
-                    if (!foundKeywordAhead)
-                    {
-                        Errors.Add(new ParserError {
-                            Token = _tokens[i],
-                            Message = Label.ErrExpectedKeyword
-                        });
-                        
-                        while (i < _tokens.Count && _tokens[i].Code != (int)TokenType.Semicolon)
-                        {
-                            if (_tokens[i].Code == (int)TokenType.Error) 
-                            {
-                                Errors.Add(new ParserError { 
-                                    Token = _tokens[i], 
-                                    Message = string.Format(Label.ErrLexical, _tokens[i].TypeName, _tokens[i].Value) 
-                                });
-                            }
-                            i++;
-                        }
-                        if (i < _tokens.Count) i++; 
-                        continue; 
-                    }
+                        Token = _tokens[i],
+                        Message = string.Format(Label.ErrMissingElement, GetTokenName(_expectedSequence[0]))
+                    });
+                    i++; 
+                    continue; 
                 }
-
-                if (i >= _tokens.Count) break;
                 int state = 0;
                 bool wasStarted = false; 
-                
                 while (state < _expectedSequence.Length && i < _tokens.Count)
                 {
                     var currentToken = _tokens[i];
-
-                    if (currentToken.Code == (int)TokenType.Error)
+                    if (_expectedSequence[state] == TokenType.Semicolon && 
+                        currentToken.Code == (int)TokenType.KeywordConst)
+                    {
+                        Errors.Add(new ParserError
+                        {
+                            Token = _tokens[i - 1], 
+                            Message = string.Format(Label.ErrMissingElement, ";")
+                        });
+                        wasStarted = false; 
+                        break; 
+                    }
+                    if (currentToken.Code == (int)TokenType.ErrorOnlyBadChars)
                     {
                         Errors.Add(new ParserError { 
                             Token = currentToken, 
@@ -119,13 +98,19 @@ namespace Comp_Lab1
                         bool foundExpectedAhead = false;
                         int lookaheadIndex = i;
 
-                        while (lookaheadIndex < _tokens.Count && _tokens[lookaheadIndex].Code != (int)TokenType.Semicolon)
+                        while (lookaheadIndex < _tokens.Count)
                         {
                             if (_tokens[lookaheadIndex].Code == (int)_expectedSequence[state])
                             {
                                 foundExpectedAhead = true;
                                 break;
                             }
+
+                            if (_tokens[lookaheadIndex].Code == (int)TokenType.Semicolon)
+                            {
+                                break;
+                            }
+
                             lookaheadIndex++;
                         }
 
@@ -133,7 +118,7 @@ namespace Comp_Lab1
                         {
                             for (int k = i; k < lookaheadIndex; k++)
                             {
-                                if (_tokens[k].Code == (int)TokenType.Error)
+                                if (_tokens[k].Code == (int)TokenType.ErrorOnlyBadChars)
                                 {
                                     Errors.Add(new ParserError {
                                         Token = _tokens[k],
@@ -157,13 +142,60 @@ namespace Comp_Lab1
                                 Message = string.Format(Label.ErrMissingElement, GetTokenName(_expectedSequence[state]))
                             });
                             
+                            bool advanceI = false;
+                            int nextAnchorStateIndex = -1;
+                            int anchorTokenIndex = -1;
+                            
+                            for (int s = state + 1; s < _expectedSequence.Length; s++)
+                            {
+                                if (_expectedSequence[s] == TokenType.Assignment || _expectedSequence[s] == TokenType.Semicolon)
+                                {
+                                    for (int k = i; k < _tokens.Count; k++)
+                                    {
+                                        if (_tokens[k].Code == (int)_expectedSequence[s])
+                                        {
+                                            anchorTokenIndex = k;
+                                            break;
+                                        }
+                                    }
+
+                                    if (anchorTokenIndex != -1)
+                                    {
+                                        nextAnchorStateIndex = s;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (anchorTokenIndex != -1)
+                            {
+                                int statesToAnchor = nextAnchorStateIndex - state;
+                                int tokensToAnchor = anchorTokenIndex - i;
+                                if (tokensToAnchor >= statesToAnchor)
+                                {
+                                    advanceI = true;
+                                }
+                            }
+                            else
+                            {
+                                if (currentToken.Code != (int)TokenType.Semicolon)
+                                {
+                                    advanceI = true;
+                                }   
+                            }
+
                             state++; 
                             wasStarted = true;
+                            
+                            if (advanceI)
+                            {
+                                i++;
+                            }
                         }
                     }
                 }
 
-                while (wasStarted && state < _expectedSequence.Length && i >= _tokens.Count)
+                if (wasStarted && state < _expectedSequence.Length && i >= _tokens.Count)
                 {
                     var lastToken = _tokens.LastOrDefault() ?? new Token { Line = 1, StartPos = 1, EndPos = 1 };
                     Errors.Add(new ParserError 
@@ -171,7 +203,6 @@ namespace Comp_Lab1
                         Token = lastToken,
                         Message = string.Format(Label.ErrUnexpectedEOF, GetTokenName(_expectedSequence[state]))
                     });
-                    state++;
                 }
             }
         }

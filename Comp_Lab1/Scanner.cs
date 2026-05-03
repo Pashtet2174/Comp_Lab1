@@ -6,13 +6,14 @@ namespace Comp_Lab1
 {
     public enum TokenType
     {
-        KeywordConst = 1,  // const
-        KeywordVal = 2,    // val
-        Identifier = 3,    // Имена 
-        StringConstant = 4, // "строковая константа"
-        Assignment = 10,   // =
-        Semicolon = 16,    // ;
-        Error = 99         // ошибка
+        KeywordConst = 1,  
+        KeywordVal = 2,    
+        Identifier = 3,     
+        StringConstant = 4, 
+        Assignment = 10,   
+        Semicolon = 16,   
+        Error = 99,         
+        ErrorOnlyBadChars = 100
     }
 
     public class Token
@@ -102,30 +103,64 @@ namespace Comp_Lab1
                 while (i < _source.Length)
                 {
                     char ch = _source[i];
-                    if (char.IsWhiteSpace(ch) || ch == '"' || ch == '=' || ch == ';')
-                    {
-                        break;
-                    }
+                    if (char.IsWhiteSpace(ch) || ch == '"' || ch == '=' || ch == ';') break;
                     i++;
                 }
 
-                string word = _source.Substring(wordStart, i - wordStart);
+                string fullWord = _source.Substring(wordStart, i - wordStart);
+                if (string.IsNullOrEmpty(fullWord)) continue;
 
-                if (IsValidIdentifier(word))
+                Func<char, bool> IsMyValidChar = (ch) => {
+                    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '_';
+                };
+
+                int left = 0;
+                while (left < fullWord.Length && !IsMyValidChar(fullWord[left]))
                 {
-                    if (_keywords.TryGetValue(word, out TokenType keywordType))
-                    {
-                        tokens.Add(CreateToken(keywordType, Label.TypeKeyword, word, currentLine, startInLine, i - lineStartPos));
-                    }
-                    else
-                    {
-                        tokens.Add(CreateToken(TokenType.Identifier, Label.TypeIdentifier, word, currentLine, startInLine, i - lineStartPos));
-                    }
+                    left++;
+                }
+
+                int right = fullWord.Length - 1;
+                while (right >= left && !IsMyValidChar(fullWord[right]))
+                {
+                    right--;
+                }
+
+                if (left > right) 
+                {
+                    tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, "Недопустимые символы", fullWord, currentLine, startInLine, startInLine + fullWord.Length - 1));
                 }
                 else
                 {
-                    tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorSymbol, word, currentLine, startInLine, i - lineStartPos));
+                    if (left > 0)
+                    {
+                        string leftTrash = fullWord.Substring(0, left);
+                        tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, "Недопустимые символы", leftTrash, currentLine, startInLine, startInLine + left - 1));
+                    }
+
+                    string coreWord = fullWord.Substring(left, right - left + 1);
+                    int coreStartPos = startInLine + left;
+                    int coreEndPos = startInLine + right;
+
+                    if (IsValidIdentifier(coreWord)) 
+                    {
+                        if (_keywords.TryGetValue(coreWord, out TokenType keywordType))
+                            tokens.Add(CreateToken(keywordType, Label.TypeKeyword, coreWord, currentLine, coreStartPos, coreEndPos));
+                        else
+                            tokens.Add(CreateToken(TokenType.Identifier, Label.TypeIdentifier, coreWord, currentLine, coreStartPos, coreEndPos));
+                    }
+                    else
+                    {
+                        tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorSymbol, coreWord, currentLine, coreStartPos, coreEndPos));
+                    }
+                    
+                    if (right < fullWord.Length - 1)
+                    {
+                        string rightTrash = fullWord.Substring(right + 1);
+                        tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, "Недопустимые символы", rightTrash, currentLine, startInLine + right + 1, startInLine + fullWord.Length - 1));
+                    }
                 }
+                continue;
             }
             return tokens;
         }
@@ -134,13 +169,11 @@ namespace Comp_Lab1
         {
             if (string.IsNullOrEmpty(word)) return false;
 
-            // Проверяем первый символ: только латинская буква (A-Z, a-z)
             if (!((word[0] >= 'a' && word[0] <= 'z') || (word[0] >= 'A' && word[0] <= 'Z')))
             {
                 return false;
             }
 
-            // Проверяем остальные символы
             for (int k = 1; k < word.Length; k++)
             {
                 char ch = word[k];
