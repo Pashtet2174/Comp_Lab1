@@ -71,6 +71,24 @@ namespace Comp_Lab1
                         wasStarted = false; 
                         break; 
                     }
+                    if (currentToken.Code == (int)TokenType.UnclosedStringConstant)
+                    {
+                        Errors.Add(new ParserError 
+                        { 
+                            Token = currentToken, 
+                            Message = "Ошибка: незакрытая строковая константа" 
+                        });
+
+                        // Если мы как раз ждали строку, считаем, что мы её "нашли" (хоть и с ошибкой),
+                        // чтобы продвинуть состояние парсера дальше и не плодить лишние ошибки.
+                        if (_expectedSequence[state] == TokenType.StringConstant)
+                        {
+                            state++;
+                        }
+                        i++;
+                        wasStarted = true;
+                        continue;
+                    }
                     if (currentToken.Code == (int)TokenType.ErrorOnlyBadChars)
                     {
                         Errors.Add(new ParserError { 
@@ -105,11 +123,7 @@ namespace Comp_Lab1
                                 foundExpectedAhead = true;
                                 break;
                             }
-
-                            if (_tokens[lookaheadIndex].Code == (int)TokenType.Semicolon)
-                            {
-                                break;
-                            }
+                            
 
                             lookaheadIndex++;
                         }

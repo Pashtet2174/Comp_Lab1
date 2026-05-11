@@ -9,7 +9,8 @@ namespace Comp_Lab1
         KeywordConst = 1,  
         KeywordVal = 2,    
         Identifier = 3,     
-        StringConstant = 4, 
+        StringConstant = 4,
+        UnclosedStringConstant = 5,
         Assignment = 10,   
         Semicolon = 16,   
         Error = 99,         
@@ -81,7 +82,9 @@ namespace Comp_Lab1
                     }
                     else
                     {
-                        tokens.Add(CreateToken(TokenType.Error, Label.TypeErrorString, _source.Substring(start, i - start), currentLine, startInLine, i - lineStartPos));
+                        // Теперь помечаем как незакрытую константу
+                        string val = _source.Substring(start, i - start);
+                        tokens.Add(CreateToken(TokenType.UnclosedStringConstant, "Незакрытая строка", val, currentLine, startInLine, i - lineStartPos));
                     }
                     continue;
                 }
@@ -103,22 +106,38 @@ namespace Comp_Lab1
                 while (i < _source.Length)
                 {
                     char ch = _source[i];
-                    if (char.IsWhiteSpace(ch) || ch == '"' || ch == '=' || ch == ';') break;
+                    // Перестаем читать слово, если встретили пробел, кавычку или равно
+                    if (char.IsWhiteSpace(ch) || ch == '"' || ch == '=') break;
+
+                    // Если встретили точку с запятой
+                    if (ch == ';')
+                    {
+                        // Проверяем: если это не конец строки И следующий символ — часть идентификатора,
+                        // значит ';' внутри слова, продолжаем чтение.
+                        if (i + 1 < _source.Length && IsMyValidChar(_source[i + 1]))
+                        {
+                            i++;
+                            continue;
+                        }
+                        else
+                        {
+                            // Иначе это конец слова или одиночный символ, выходим из цикла
+                            break;
+                        }
+                    }
                     i++;
                 }
 
                 string fullWord = _source.Substring(wordStart, i - wordStart);
-                if (string.IsNullOrEmpty(fullWord)) continue;
 
-                Func<char, bool> IsMyValidChar = (ch) => {
-                    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '_';
-                };
+                if (string.IsNullOrEmpty(fullWord)) continue;
+                
 
                 int left = 0;
                 while (left < fullWord.Length && !IsMyValidChar(fullWord[left]))
                 {
                     left++;
-                }
+                }   
 
                 int right = fullWord.Length - 1;
                 while (right >= left && !IsMyValidChar(fullWord[right]))
@@ -142,12 +161,17 @@ namespace Comp_Lab1
                     int coreStartPos = startInLine + left;
                     int coreEndPos = startInLine + right;
 
-                    if (IsValidIdentifier(coreWord)) 
+                    if (IsValidIdentifier(coreWord) && !coreWord.Contains(";")) 
                     {
                         if (_keywords.TryGetValue(coreWord, out TokenType keywordType))
                             tokens.Add(CreateToken(keywordType, Label.TypeKeyword, coreWord, currentLine, coreStartPos, coreEndPos));
                         else
                             tokens.Add(CreateToken(TokenType.Identifier, Label.TypeIdentifier, coreWord, currentLine, coreStartPos, coreEndPos));
+                    }
+                    else if (coreWord.Contains(";"))
+                    {
+                        // Если внутри есть точка с запятой — это ошибка типа Error
+                        tokens.Add(CreateToken(TokenType.Error, "Ошибка: ';' внутри слова", coreWord, currentLine, coreStartPos, coreEndPos));
                     }
                     else
                     {
@@ -165,6 +189,13 @@ namespace Comp_Lab1
             return tokens;
         }
 
+        private bool IsMyValidChar(char ch) 
+        {
+            return (ch >= 'a' && ch <= 'z')  ||
+                   (ch >= 'A' && ch <= 'Z')  ||
+                   (ch >= '0' && ch <= '9') || 
+                   ch == '_';
+        }
         private bool IsValidIdentifier(string word)
         {
             if (string.IsNullOrEmpty(word)) return false;
