@@ -344,6 +344,24 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ошибка: &apos;;&apos; внутри слова.
+        /// </summary>
+        internal static string ErrorSemicolonInWord {
+            get {
+                return ResourceManager.GetString("ErrorSemicolonInWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка: незакрытая строковая константа.
+        /// </summary>
+        internal static string ErrorUnclosedString {
+            get {
+                return ResourceManager.GetString("ErrorUnclosedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка: .
         /// </summary>
         internal static string ErrPrefix {
@@ -831,7 +849,7 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to недопустимый символ.
+        ///   Looks up a localized string similar to недопустимые символы.
         /// </summary>
         internal static string TypeErrorSymbol {
             get {

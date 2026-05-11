@@ -212,6 +212,12 @@ Check if it is copied to: {0}</value>
   <data name="ErrOpenPage1" xml:space="preserve">
     <value>Failed to open page: </value>
   </data>
+  <data name="ErrorUnclosedString" xml:space="preserve">
+  <value>Error: unclosed string constant</value>
+</data>
+  <data name="ErrorSemicolonInWord" xml:space="preserve">
+  <value>Error: ';' inside a word</value>
+</data>
   <data name="ErrorLocationFormat" xml:space="preserve">
     <value>line {0}, pos {1}</value>
   </data>

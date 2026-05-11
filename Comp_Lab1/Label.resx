@@ -142,6 +142,12 @@
   <data name="AnalysisSuccess" xml:space="preserve">
     <value>Анализ завершен успешно. Ошибок не обнаружено!</value>
   </data>
+  <data name="ErrorUnclosedString" xml:space="preserve">
+  <value>Ошибка: незакрытая строковая константа</value>
+</data>
+  <data name="ErrorSemicolonInWord" xml:space="preserve">
+  <value>Ошибка: ';' внутри слова</value>
+</data>
   <data name="AppTitle" xml:space="preserve">
     <value>Компилятор</value>
   </data>
@@ -382,7 +388,7 @@
     <value>незакрытая строка</value>
   </data>
   <data name="TypeErrorSymbol" xml:space="preserve">
-    <value>недопустимый символ</value>
+    <value>недопустимые символы</value>
   </data>
   <data name="TypeIdentifier" xml:space="preserve">
     <value>идентификатор</value>

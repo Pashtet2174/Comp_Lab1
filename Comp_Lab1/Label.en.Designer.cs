@@ -344,6 +344,24 @@ namespace Comp_Lab1 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error: &apos;;&apos; inside a word.
+        /// </summary>
+        internal static string ErrorSemicolonInWord {
+            get {
+                return ResourceManager.GetString("ErrorSemicolonInWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: unclosed string constant.
+        /// </summary>
+        internal static string ErrorUnclosedString {
+            get {
+                return ResourceManager.GetString("ErrorUnclosedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: .
         /// </summary>
         internal static string ErrPrefix {

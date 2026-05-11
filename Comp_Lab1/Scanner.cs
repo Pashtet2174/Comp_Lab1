@@ -82,9 +82,8 @@ namespace Comp_Lab1
                     }
                     else
                     {
-                        // Теперь помечаем как незакрытую константу
                         string val = _source.Substring(start, i - start);
-                        tokens.Add(CreateToken(TokenType.UnclosedStringConstant, "Незакрытая строка", val, currentLine, startInLine, i - lineStartPos));
+                        tokens.Add(CreateToken(TokenType.UnclosedStringConstant, Label.TypeErrorString, val, currentLine, startInLine, i - lineStartPos));
                     }
                     continue;
                 }
@@ -106,14 +105,10 @@ namespace Comp_Lab1
                 while (i < _source.Length)
                 {
                     char ch = _source[i];
-                    // Перестаем читать слово, если встретили пробел, кавычку или равно
                     if (char.IsWhiteSpace(ch) || ch == '"' || ch == '=') break;
 
-                    // Если встретили точку с запятой
                     if (ch == ';')
                     {
-                        // Проверяем: если это не конец строки И следующий символ — часть идентификатора,
-                        // значит ';' внутри слова, продолжаем чтение.
                         if (i + 1 < _source.Length && IsMyValidChar(_source[i + 1]))
                         {
                             i++;
@@ -121,7 +116,6 @@ namespace Comp_Lab1
                         }
                         else
                         {
-                            // Иначе это конец слова или одиночный символ, выходим из цикла
                             break;
                         }
                     }
@@ -147,14 +141,14 @@ namespace Comp_Lab1
 
                 if (left > right) 
                 {
-                    tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, "Недопустимые символы", fullWord, currentLine, startInLine, startInLine + fullWord.Length - 1));
+                    tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, Label.TypeErrorSymbol, fullWord, currentLine, startInLine, startInLine + fullWord.Length - 1));
                 }
                 else
                 {
                     if (left > 0)
                     {
                         string leftTrash = fullWord.Substring(0, left);
-                        tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, "Недопустимые символы", leftTrash, currentLine, startInLine, startInLine + left - 1));
+                        tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, Label.TypeErrorSymbol, leftTrash, currentLine, startInLine, startInLine + left - 1));
                     }
 
                     string coreWord = fullWord.Substring(left, right - left + 1);
@@ -170,8 +164,7 @@ namespace Comp_Lab1
                     }
                     else if (coreWord.Contains(";"))
                     {
-                        // Если внутри есть точка с запятой — это ошибка типа Error
-                        tokens.Add(CreateToken(TokenType.Error, "Ошибка: ';' внутри слова", coreWord, currentLine, coreStartPos, coreEndPos));
+                        tokens.Add(CreateToken(TokenType.Error, Label.ErrorSemicolonInWord, coreWord, currentLine, coreStartPos, coreEndPos));
                     }
                     else
                     {
@@ -181,7 +174,7 @@ namespace Comp_Lab1
                     if (right < fullWord.Length - 1)
                     {
                         string rightTrash = fullWord.Substring(right + 1);
-                        tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, "Недопустимые символы", rightTrash, currentLine, startInLine + right + 1, startInLine + fullWord.Length - 1));
+                        tokens.Add(CreateToken(TokenType.ErrorOnlyBadChars, Label.TypeErrorSymbol, rightTrash, currentLine, startInLine + right + 1, startInLine + fullWord.Length - 1));
                     }
                 }
                 continue;

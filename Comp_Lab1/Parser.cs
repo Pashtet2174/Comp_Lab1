@@ -76,11 +76,9 @@ namespace Comp_Lab1
                         Errors.Add(new ParserError 
                         { 
                             Token = currentToken, 
-                            Message = "Ошибка: незакрытая строковая константа" 
+                            Message = Label.ErrorUnclosedString
                         });
 
-                        // Если мы как раз ждали строку, считаем, что мы её "нашли" (хоть и с ошибкой),
-                        // чтобы продвинуть состояние парсера дальше и не плодить лишние ошибки.
                         if (_expectedSequence[state] == TokenType.StringConstant)
                         {
                             state++;
